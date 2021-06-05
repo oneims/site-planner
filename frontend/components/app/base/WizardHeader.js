@@ -9,10 +9,11 @@ import {
 
 import { StyledButton, StyledLinkButton } from "@/components/styledComponents/StyledElements";
 
-const WizardHeader = () => {
+const WizardHeader = (props) => {
+  const { currentStep } = props;
   return (
     <>
-      <StyledHeader className="step step__one">
+      <StyledHeader className={`step step__${currentStep}`}>
         <Container>
           <StyledHeaderWrapper>
             <StyledHeaderColumn>
@@ -29,7 +30,7 @@ const WizardHeader = () => {
               </Link>
             </StyledHeaderColumn>
             <StyledHeaderColumn>
-              <Link href="/get-started">
+              <Link href="/project-wizard/step-two">
                 <StyledButton themeStyle="primary">Next</StyledButton>
               </Link>
             </StyledHeaderColumn>

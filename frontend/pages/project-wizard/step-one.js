@@ -5,12 +5,16 @@ import { StyledSection, StyledContentBox } from "@/components/styledComponents/S
 import { StyledHeadingOne } from "@/components/styledComponents/StyledTypography";
 
 class ProjectWizardStepOne extends Component {
+  componentDidMount = () => {
+    this.props.updateHeaderState("one");
+  };
+
   render() {
-    console.log(this.props);
+    const { currentStep } = this.props;
 
     return (
       <>
-        <WizardLayout>
+        <WizardLayout currentStep={currentStep}>
           <StyledSection>
             <Container>
               <StyledContentBox maxWidth="800" className="text-center mx-auto">

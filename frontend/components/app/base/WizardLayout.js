@@ -11,10 +11,10 @@ const StyledMain = styled.main`
 
 export class WizardLayout extends Component {
   render() {
-    const { children } = this.props;
+    const { currentStep, children } = this.props;
     return (
       <>
-        <WizardHeader />
+        <WizardHeader currentStep={currentStep} />
         <StyledMain>{children}</StyledMain>
         <WizardFooter />
       </>

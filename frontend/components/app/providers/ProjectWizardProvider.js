@@ -5,12 +5,9 @@ class ProjectWizardProvider extends Component {
     currentStep: "",
   };
 
-  updateHeaderState = (newStep, newBackDestination, newNextDestination, newButtonText) => {
+  updateHeaderState = (newStep) => {
     this.setState({
       currentStep: newStep,
-      backDestination: newBackDestination,
-      nextDestination: newNextDestination,
-      nextButtonText: newButtonText,
     });
   };
 
