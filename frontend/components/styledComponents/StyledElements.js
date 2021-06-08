@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { darken } from "polished";
 
+const primaryColor = (props) => {
+  return props.theme.primary;
+};
 // ***Elements
 export const StyledButton = styled.button`
   padding: 0.6rem 1.25rem;
@@ -112,3 +115,37 @@ export const StyledInput = styled.input`
     outline: 0;
   }
 `;
+
+// React Select
+export const ColorStyles = {
+  control: (styles) => ({
+    ...styles,
+    backgroundColor: "#f5f8fa",
+    minHeight: "40px",
+    fontWeight: "700",
+    fontSize: "1.15rem",
+  }),
+  menu: (styles) => ({
+    ...styles,
+    fontWeight: "700",
+    backgroundColor: "#f5f8fa",
+  }),
+  input: (styles) => ({
+    ...styles,
+    fontWeight: "700",
+  }),
+  option: (styles, { isDisabled, isFocused, isSelected }) => {
+    const color = "#345dee";
+    return {
+      ...styles,
+      backgroundColor: isDisabled ? null : isSelected ? color : isFocused ? `#eee` : null,
+      color: isDisabled ? "#ccc" : isSelected ? (10 > 2 ? "white" : "black") : `#000`,
+      cursor: isDisabled ? "not-allowed" : "default",
+      borderColor: isFocused ? color : null,
+      ":active": {
+        ...styles[":active"],
+        backgroundColor: !isDisabled && (isSelected ? color : "#eee"),
+      },
+    };
+  },
+};

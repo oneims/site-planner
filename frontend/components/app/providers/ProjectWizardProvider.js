@@ -50,6 +50,16 @@ class ProjectWizardProvider extends Component {
     this.updateNextSteps();
   };
 
+  handleSelectChange = (value, target) => {
+    this.setState({
+      [target.name]: value,
+    });
+    if (typeof window !== "undefined") {
+      localStorage.setItem(target.name, JSON.stringify(value));
+    }
+    this.updateNextSteps();
+  };
+
   updateStepOneButtonState = () => {
     setTimeout(() => {
       if (this.state.currentStep === "step__one") {
@@ -101,6 +111,7 @@ class ProjectWizardProvider extends Component {
 
   updateNextSteps = () => {
     this.updateStepOneButtonState();
+    this.updateStepTwoButtonState();
   };
 
   render() {
@@ -117,6 +128,7 @@ class ProjectWizardProvider extends Component {
       >
         <Component
           handleChange={this.handleChange}
+          handleSelectChange={this.handleSelectChange}
           updateHeaderState={this.updateHeaderState}
           updateStepOneButtonState={this.updateStepOneButtonState}
           updateStepTwoButtonState={this.updateStepTwoButtonState}

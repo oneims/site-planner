@@ -20,7 +20,7 @@ class ProjectWizardStepOne extends Component {
 
     return (
       <>
-        <StyledSection>
+        <StyledSection className="mh-90vh">
           <Container>
             <StyledContentBox maxWidth="800" className="text-center mx-auto">
               <StyledHeadingOne>Name Your Project</StyledHeadingOne>

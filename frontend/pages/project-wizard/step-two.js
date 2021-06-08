@@ -6,8 +6,24 @@ import {
   StyledField,
   StyledFieldWrapper,
   StyledFormWrapper,
-  StyledInput,
+  ColorStyles,
 } from "@/components/styledComponents/StyledElements";
+import dynamic from "next/dynamic";
+const Select = dynamic(() => import("react-select"), { ssr: false });
+
+const industries = [
+  {
+    industry: [
+      { value: "software", label: "Software" },
+      { value: "retail", label: "Retail" },
+      { value: "finance", label: "Finance" },
+      { value: "trade", label: "Trade" },
+      { value: "transport", label: "Transport" },
+      { value: "construction", label: "Construction" },
+      { value: "health_care", label: "Health Care" },
+    ],
+  },
+];
 
 class ProjectWizardStepTwo extends Component {
   componentDidMount = () => {
@@ -21,25 +37,26 @@ class ProjectWizardStepTwo extends Component {
   };
 
   render() {
-    const { project_industry, handleChange } = this.props;
+    const { project_industry, handleSelectChange } = this.props;
 
     return (
       <>
-        <StyledSection>
+        <StyledSection className="mh-90vh">
           <Container>
             <StyledContentBox maxWidth="800" className="text-center mx-auto">
               <StyledHeadingOne>Select an Industry</StyledHeadingOne>
             </StyledContentBox>
-            <StyledContentBox className="text-center mx-auto mw-500 mt-4 pt-1">
+            <StyledContentBox className="mx-auto mw-500 mt-4 pt-1">
               <StyledFormWrapper>
                 <StyledFieldWrapper>
                   <StyledField>
-                    <StyledInput
-                      themeStyle="large"
+                    <Select
+                      className="c-select"
                       name="project_industry"
                       value={project_industry}
-                      onChange={handleChange}
-                      placeholder="e.g. Saas"
+                      styles={ColorStyles}
+                      onChange={handleSelectChange}
+                      options={industries[0].industry}
                     />
                   </StyledField>
                 </StyledFieldWrapper>

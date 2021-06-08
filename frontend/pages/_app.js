@@ -152,8 +152,17 @@ h6,
   }
 }
 
+.c-select {
+  input {
+    font-weight: 700;
+  }
+}
 
 // Utils
+
+.mh-90vh {
+  min-height: 90vh;
+}
 
 .mw-500 {
   max-width: 500px;
