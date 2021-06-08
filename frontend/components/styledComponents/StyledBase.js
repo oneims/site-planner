@@ -62,3 +62,13 @@ export const StyledFooterWrapper = styled.div`
 export const StyledFooterText = styled.span`
   color: ${(props) => (props.Gray ? props.theme.gray : ``)};
 `;
+
+export const StyledAppFooter = styled.footer`
+  padding: 1rem 0;
+  position: fixed;
+  background-color: #fff;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: 2px solid #eee;
+`;

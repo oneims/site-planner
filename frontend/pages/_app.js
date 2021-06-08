@@ -5,9 +5,8 @@ import ProjectWizardProvider from "@/components/app/providers/ProjectWizardProvi
 
 const theme = {
   primary: "#345dee",
-  primaryHover: "#2143bd",
   secondary: "#111827",
-  secondaryHover: "#374051",
+  hoverIntensity: 0.1,
   purple: "#a855f7",
   red: "#ec4899",
   orange: "#fb923c",
@@ -131,10 +130,10 @@ h6,
     bottom: 0px;
     width: 100%;
     max-width: 0px;
-    transition: all 0.4s ease 0.2s;
+    transition: all 0.4s ease 0.1s;
     height: 3px;
-    opacity: 0.5;
-    background-color: rgb(0, 85, 255);
+    opacity: 0.7;
+    background-color: ${theme.primary};
   }
   &__one {
     &:before {
@@ -155,6 +154,30 @@ h6,
 
 
 // Utils
+
+.mw-500 {
+  max-width: 500px;
+}
+
+.mw-600 {
+  max-width: 600px;
+}
+
+.mw-700 {
+  max-width: 700px;
+}
+
+.mw-800 {
+  max-width: 800px;
+}
+
+.mw-900 {
+  max-width: 900px;
+}
+
+.mw-1000 {
+  max-width: 1000px;
+}
 
 .mh-negative {
   @media (max-width: 576px) {

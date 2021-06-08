@@ -10,14 +10,14 @@ import {
 import { StyledButton, StyledLinkButton } from "@/components/styledComponents/StyledElements";
 
 const WizardHeader = (props) => {
-  const { currentStep } = props;
+  const { currentStep, nextButtonText, backDestination, nextButtonState, nextDestination } = props;
   return (
     <>
-      <StyledHeader className={`step step__${currentStep}`}>
+      <StyledHeader className={`step ${currentStep}`}>
         <Container>
           <StyledHeaderWrapper>
             <StyledHeaderColumn>
-              <Link href="/">
+              <Link href={backDestination}>
                 <StyledLinkButton>
                   <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                     <path
@@ -30,8 +30,10 @@ const WizardHeader = (props) => {
               </Link>
             </StyledHeaderColumn>
             <StyledHeaderColumn>
-              <Link href="/project-wizard/step-two">
-                <StyledButton themeStyle="primary">Next</StyledButton>
+              <Link href={nextDestination}>
+                <StyledButton state={nextButtonState} themeStyle="primary">
+                  {nextButtonText}
+                </StyledButton>
               </Link>
             </StyledHeaderColumn>
           </StyledHeaderWrapper>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { darken } from "polished";
 
 // ***Elements
 export const StyledButton = styled.button`
@@ -15,7 +16,9 @@ export const StyledButton = styled.button`
   transition: 0.2s ease;
   &:hover {
     background-color: ${(props) =>
-      props.themeStyle === "secondary" ? props.theme.secondaryHover : props.theme.primaryHover};
+      props.themeStyle === "secondary"
+        ? darken(props.theme.hoverIntensity, props.theme.secondary)
+        : darken(props.theme.hoverIntensity, props.theme.primary)};
   }
   ${(props) =>
     props.size === "large"
@@ -24,6 +27,15 @@ export const StyledButton = styled.button`
         @media (min-width: 768px) {
             font-size: 1.35rem;
           }
+      `
+      : ``};
+  ${(props) =>
+    props.state === "disabled"
+      ? `
+        transition: 0.2s ease;
+        background-color: #888;
+        pointer-events: none;
+        color: #fff;
       `
       : ``};
 `;
@@ -52,3 +64,51 @@ export const StyledLinkButton = styled.button`
 `;
 
 // App Elements
+
+// Form
+
+export const StyledFormWrapper = styled.div``;
+
+export const StyledFieldWrapper = styled.div`
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    align-items: center;
+  }
+`;
+
+export const StyledLabel = styled.label`
+  font-weight: 600;
+  font-size: 0.9rem;
+`;
+
+export const StyledField = styled.div`
+  width: 100%;
+  margin-bottom: 1.5rem;
+  @media (min-width: 768px) {
+    width: ${(props) => (props.themeStyle === "two-column" ? "49%" : "100%")};
+    margin-bottom: 0;
+  }
+`;
+
+export const StyledInput = styled.input`
+  padding: 9px 10px;
+  border-radius: 3px;
+  border: 1px solid #cbd6e2;
+  transition: all 0.15s ease-out;
+  background-color: #f5f8fa;
+  color: #000;
+  display: block;
+  line-height: 22px;
+  text-align: left;
+  vertical-align: middle;
+  width: 100%;
+  font-weight: 700;
+  font-size: ${(props) => (props.themeStyle === "large" ? "1.15rem;" : "1rem")};
+  &:focus {
+    border-color: ${(props) => props.theme.primary};
+    box-shadow: 0 0 4px 1px rgb(52 93 238 / 30%), 0 0 0 1px ${(props) => props.theme.primary};
+    outline: 0;
+  }
+`;

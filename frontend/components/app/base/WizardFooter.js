@@ -1,21 +1,26 @@
 import React from "react";
+import Link from "next/link";
 import { Container } from "react-bootstrap";
-import {
-  StyledFooter,
-  StyledFooterWrapper,
-  StyledFooterText,
-} from "@/components/styledComponents/StyledBase";
+import { StyledAppFooter } from "@/components/styledComponents/StyledBase";
+import { StyledButton } from "@/components/styledComponents/StyledElements";
 
-const WizardFooter = () => {
+const WizardFooter = (props) => {
+  const { nextDestination, nextButtonText, nextButtonState, currentStep } = props;
   return (
     <>
-      <StyledFooter>
-        <Container>
-          <StyledFooterWrapper>
-            <StyledFooterText Gray>© Copyright SitePlanner 2021</StyledFooterText>
-          </StyledFooterWrapper>
+      <StyledAppFooter>
+        <Container className="text-center">
+          {currentStep === "step__three" ? (
+            <StyledButton className={nextButtonState}>{nextButtonText}</StyledButton>
+          ) : (
+            <Link href={nextDestination}>
+              <StyledButton state={nextButtonState} themeStyle="primary">
+                {nextButtonText}
+              </StyledButton>
+            </Link>
+          )}
         </Container>
-      </StyledFooter>
+      </StyledAppFooter>
     </>
   );
 };

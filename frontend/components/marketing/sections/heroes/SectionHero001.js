@@ -10,7 +10,7 @@ const SectionHero001 = () => {
     <StyledSection>
       <Container>
         <StyledContentBox maxWidth="800">
-          <StyledHeadingOne>The only site planner you'll ever need!</StyledHeadingOne>
+          <StyledHeadingOne>Siteplanner's Homepage</StyledHeadingOne>
           <StyledSubtitle>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
             has been the industry's standard dummy text ever since the 1500s.
