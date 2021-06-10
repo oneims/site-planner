@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
-import ProjectWizardProvider from "@/components/app/providers/ProjectWizardProvider";
+import ProjectWizardProvider from "providers/ProjectWizardProvider";
+import ProjectProvider from "providers/ProjectProvider";
 
 const theme = {
   primary: "#345dee",
@@ -219,6 +220,15 @@ class MyApp extends Component {
           <GlobalStyle />
           <ThemeProvider theme={theme}>
             <ProjectWizardProvider {...this.props} />
+          </ThemeProvider>
+        </>
+      );
+    } else if (router.pathname.startsWith("/project/")) {
+      return (
+        <>
+          <GlobalStyle />
+          <ThemeProvider theme={theme}>
+            <ProjectProvider {...this.props} />
           </ThemeProvider>
         </>
       );

@@ -11,7 +11,9 @@ const WizardFooter = (props) => {
       <StyledAppFooter>
         <Container className="text-center">
           {currentStep === "step__three" ? (
-            <StyledButton className={nextButtonState}>{nextButtonText}</StyledButton>
+            <StyledButton state={nextButtonState} className={nextButtonState}>
+              {nextButtonText}
+            </StyledButton>
           ) : (
             <Link href={nextDestination}>
               <StyledButton state={nextButtonState} themeStyle="primary">

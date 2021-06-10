@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import WizardLayout from "../base/WizardLayout";
+import WizardLayout from "/components/app/base/WizardLayout";
 
 class ProjectWizardProvider extends Component {
   state = {
@@ -12,6 +12,11 @@ class ProjectWizardProvider extends Component {
     project_industry:
       typeof window !== "undefined" && window.localStorage.getItem("project_industry")
         ? JSON.parse(localStorage.project_industry)
+        : "",
+    // Step Three
+    number_of_pages:
+      typeof window !== "undefined" && window.localStorage.getItem("number_of_pages")
+        ? JSON.parse(localStorage.number_of_pages)
         : "",
     // Action Level State
     currentStep: "",
@@ -109,9 +114,30 @@ class ProjectWizardProvider extends Component {
     }, 100);
   };
 
+  updateStepThreeButtonState = () => {
+    setTimeout(() => {
+      if (this.state.currentStep === "step__three") {
+        if (this.state.number_of_pages) {
+          this.setState({
+            nextButtonState: "enabled",
+            clearedStepTwo: true,
+          });
+          if (typeof window !== "undefined") {
+            localStorage.setItem("clearedStepThree", true);
+          }
+        } else {
+          this.setState({
+            nextButtonState: "disabled",
+          });
+        }
+      }
+    }, 100);
+  };
+
   updateNextSteps = () => {
     this.updateStepOneButtonState();
     this.updateStepTwoButtonState();
+    this.updateStepThreeButtonState();
   };
 
   render() {
@@ -132,6 +158,7 @@ class ProjectWizardProvider extends Component {
           updateHeaderState={this.updateHeaderState}
           updateStepOneButtonState={this.updateStepOneButtonState}
           updateStepTwoButtonState={this.updateStepTwoButtonState}
+          updateStepThreeButtonState={this.updateStepThreeButtonState}
           {...this.state}
           {...pageProps}
         />

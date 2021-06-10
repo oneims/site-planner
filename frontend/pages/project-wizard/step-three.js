@@ -14,13 +14,11 @@ const Select = dynamic(() => import("react-select"), { ssr: false });
 const industries = [
   {
     industry: [
-      { value: "software", label: "Software" },
-      { value: "retail", label: "Retail" },
-      { value: "finance", label: "Finance" },
-      { value: "trade", label: "Trade" },
-      { value: "transport", label: "Transport" },
-      { value: "construction", label: "Construction" },
-      { value: "health_care", label: "Health Care" },
+      { value: "1-5", label: "1-5" },
+      { value: "5-10", label: "5-10" },
+      { value: "10-15", label: "10-15" },
+      { value: "15-20", label: "15-20" },
+      { value: "20+", label: "20+" },
     ],
   },
 ];
@@ -28,23 +26,23 @@ const industries = [
 class ProjectWizardStepTwo extends Component {
   componentDidMount = () => {
     this.props.updateHeaderState(
-      "step__two",
-      "/project-wizard/step-one",
-      "/project-wizard/step-three",
-      "Next"
+      "step__three",
+      "/project-wizard/step-two",
+      "#",
+      "Create My Project"
     );
-    this.props.updateStepTwoButtonState();
+    this.props.updateStepThreeButtonState();
   };
 
   render() {
-    const { project_industry, handleSelectChange } = this.props;
+    const { number_of_pages, handleSelectChange } = this.props;
 
     return (
       <>
         <StyledSection className="mh-90vh">
           <Container>
             <StyledContentBox maxWidth="800" className="text-center mx-auto">
-              <StyledHeadingOne>Select an Industry</StyledHeadingOne>
+              <StyledHeadingOne>Number of Pages</StyledHeadingOne>
             </StyledContentBox>
             <StyledContentBox className="mx-auto mw-500 mt-4 pt-1">
               <StyledFormWrapper>
@@ -52,8 +50,8 @@ class ProjectWizardStepTwo extends Component {
                   <StyledField>
                     <Select
                       className="c-select"
-                      name="project_industry"
-                      value={project_industry}
+                      name="number_of_pages"
+                      value={number_of_pages}
                       styles={ColorStyles}
                       onChange={handleSelectChange}
                       options={industries[0].industry}

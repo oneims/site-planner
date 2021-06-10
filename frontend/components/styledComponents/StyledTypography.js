@@ -22,6 +22,15 @@ export const StyledHeadingOne = styled.h1`
   @media (min-width: 992px) {
     font-size: 3.5rem;
   }
+  ${(props) =>
+    props.themeStyle === "small"
+      ? `
+  @media (min-width: 992px) {
+    font-size: 2.25rem;
+  }
+  
+  `
+      : ``};
 `;
 
 export const StyledHeadingTwo = styled.h2`
