@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import { darken } from "polished";
+import { theme } from "../../styles/ThemeConfig.js";
 
-const primaryColor = (props) => {
-  return props.theme.primary;
-};
 // ***Elements
 export const StyledButton = styled.button`
   padding: 0.6rem 1.25rem;
@@ -12,16 +10,16 @@ export const StyledButton = styled.button`
   color: #fff;
   border: none;
   outline: none;
-  border-radius: ${(props) => props.theme.defaultBorderRadius};
+  border-radius: ${theme.defaultBorderRadius};
   font-weight: 600;
   background-color: ${(props) =>
-    props.themeStyle === "secondary" ? props.theme.secondary : props.theme.primary};
+    props.themeStyle === "secondary" ? props.theme.colors.secondary : props.theme.colors.primary};
   transition: 0.2s ease;
   &:hover {
     background-color: ${(props) =>
       props.themeStyle === "secondary"
-        ? darken(props.theme.hoverIntensity, props.theme.secondary)
-        : darken(props.theme.hoverIntensity, props.theme.primary)};
+        ? darken(props.theme.hoverIntensity, props.theme.colors.secondary)
+        : darken(props.theme.hoverIntensity, props.theme.colors.primary)};
   }
   ${(props) =>
     props.size === "large"
@@ -58,7 +56,7 @@ export const StyledLinkButton = styled.button`
   display: flex;
   align-items: center;
   &:hover {
-    color: ${(props) => props.theme.primary};
+    color: ${(props) => props.theme.colors.primary};
     transition: 0.2s ease;
   }
   svg {
@@ -110,21 +108,26 @@ export const StyledInput = styled.input`
   font-weight: 700;
   font-size: ${(props) => (props.themeStyle === "large" ? "1.15rem;" : "1rem")};
   &:focus {
-    border-color: ${(props) => props.theme.primary};
-    box-shadow: 0 0 4px 1px rgb(52 93 238 / 30%), 0 0 0 1px ${(props) => props.theme.primary};
+    border-color: ${(props) => props.theme.colors.primary};
+    box-shadow: 0 0 4px 1px rgb(129 140 248 / 30%),
+      0 0 0 1px ${(props) => props.theme.colors.primary};
     outline: 0;
   }
 `;
 
 // React Select
 export const ColorStyles = {
-  control: (styles) => ({
-    ...styles,
-    backgroundColor: "#f5f8fa",
-    minHeight: "40px",
-    fontWeight: "700",
-    fontSize: "1.15rem",
-  }),
+  control: (styles, { isFocused }) => {
+    return {
+      ...styles,
+      backgroundColor: "#f5f8fa",
+      minHeight: "40px",
+      fontWeight: "700",
+      fontSize: "1.15rem",
+      borderColor: isFocused ? theme.colors.primary : `hsl(0, 0%, 80%)`,
+      boxShadow: isFocused ? `0 0 0 1px ${theme.colors.primary}` : null,
+    };
+  },
   menu: (styles) => ({
     ...styles,
     fontWeight: "700",
@@ -135,16 +138,21 @@ export const ColorStyles = {
     fontWeight: "700",
   }),
   option: (styles, { isDisabled, isFocused, isSelected }) => {
-    const color = "#345dee";
     return {
       ...styles,
-      backgroundColor: isDisabled ? null : isSelected ? color : isFocused ? `#eee` : null,
+      backgroundColor: isDisabled
+        ? null
+        : isSelected
+        ? theme.colors.primary
+        : isFocused
+        ? `#eee`
+        : null,
       color: isDisabled ? "#ccc" : isSelected ? (10 > 2 ? "white" : "black") : `#000`,
       cursor: isDisabled ? "not-allowed" : "default",
-      borderColor: isFocused ? color : null,
+      borderColor: isFocused ? theme.colors.primary : null,
       ":active": {
         ...styles[":active"],
-        backgroundColor: !isDisabled && (isSelected ? color : "#eee"),
+        backgroundColor: !isDisabled && (isSelected ? theme.colors.primary : "#eee"),
       },
     };
   },

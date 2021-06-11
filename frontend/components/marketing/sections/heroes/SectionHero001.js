@@ -18,7 +18,7 @@ const SectionHero001 = () => {
           <StyledContentBox className="d-sm-flex justify-content-center mt-4">
             <Link href="/project-wizard/step-one">
               <StyledButton size="large" themeStyle="primary">
-                Create a Sitemap!
+                Create a New Project!
               </StyledButton>
             </Link>
           </StyledContentBox>

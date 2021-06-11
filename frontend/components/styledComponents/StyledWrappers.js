@@ -44,3 +44,54 @@ export const StyledImageWrapper = styled.div`
   ${(props) => (props.maxHeight == "1000" ? `height: 1000px;` : ``)};
   ${(props) => (props.maxHeight == "1100" ? `height: 1100px;` : ``)};
 `;
+
+// App
+export const StyledAppWrapper = styled.section`
+  margin: 2rem 0;
+`;
+
+export const StyledAppContent = styled.div`
+  display: flex;
+  margin-left: -15px;
+  margin-right: -15px;
+`;
+
+export const StyledAppBlock = styled.div`
+  padding: 1.25rem 0;
+  overflow: hidden;
+  position: relative;
+`;
+
+export const StyledAsideWrapper = styled.div`
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+  max-width: 350px;
+`;
+
+export const StyledViewPortWrapper = styled.div`
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+`;
+
+export const StyledAside = styled.aside`
+  width: 100%;
+  height: 80vh;
+  background-color: #f7f9fb;
+  border-radius: 15px;
+  border: 2px solid #eee;
+  padding-left: 30px;
+  padding-right: 30px;
+`;
+
+export const StyledViewPort = styled.div`
+  width: 100%;
+  background-color: #f7f9fb;
+  border-radius: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+  height: 80vh;
+  overflow-y: scroll;
+  border: 2px solid #eee;
+`;

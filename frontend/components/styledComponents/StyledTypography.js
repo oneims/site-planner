@@ -10,7 +10,7 @@ export const StyledLabel = styled.span`
 `;
 
 export const StyledSubtitle = styled.p`
-  ${(props) => (props.themeStyle === "gray" ? `color: ${props.theme.gray}` : ``)};
+  ${(props) => (props.themeStyle === "gray" ? `color: ${props.theme.colors.gray}` : ``)};
   font-size: 1.125rem;
   @media (min-width: 768px) {
     font-size: 1.35rem;
@@ -18,7 +18,7 @@ export const StyledSubtitle = styled.p`
 `;
 
 export const StyledHeadingOne = styled.h1`
-  ${(props) => (props.themeStyle === "primary" ? `color: ${props.theme.primary}` : ``)};
+  ${(props) => (props.themeStyle === "primary" ? `color: ${props.theme.colors.primary}` : ``)};
   @media (min-width: 992px) {
     font-size: 3.5rem;
   }

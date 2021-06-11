@@ -1,19 +1,39 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
-import { StyledSection, StyledContentBox } from "@/components/styledComponents/StyledWrappers";
+import {
+  StyledAppBlock,
+  StyledContentBox,
+  StyledAppWrapper,
+  StyledAppContent,
+  StyledAside,
+  StyledAsideWrapper,
+  StyledViewPort,
+  StyledViewPortWrapper,
+} from "@/components/styledComponents/StyledWrappers";
 import { StyledHeadingOne } from "@/components/styledComponents/StyledTypography";
 
 class ProjectOverview extends Component {
   render() {
     return (
       <>
-        <StyledSection className="mh-90vh">
-          <Container>
-            <StyledContentBox maxWidth="800" className="text-center mx-auto">
-              <StyledHeadingOne>Project ID</StyledHeadingOne>
-            </StyledContentBox>
+        <StyledAppWrapper>
+          <Container fluid>
+            <StyledAppContent>
+              <StyledAsideWrapper>
+                <StyledAside></StyledAside>
+              </StyledAsideWrapper>
+              <StyledViewPortWrapper>
+                <StyledViewPort>
+                  <StyledAppBlock className="my-0">
+                    <StyledContentBox>
+                      <h2>Project Name</h2>
+                    </StyledContentBox>
+                  </StyledAppBlock>
+                </StyledViewPort>
+              </StyledViewPortWrapper>
+            </StyledAppContent>
           </Container>
-        </StyledSection>
+        </StyledAppWrapper>
       </>
     );
   }

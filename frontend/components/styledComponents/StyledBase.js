@@ -7,8 +7,8 @@ export const StyledHeader = styled.header`
   left: 0;
   width: 100%;
   z-index: 999;
-  background-color: ${(props) => props.theme.white};
-  border-bottom: 1px solid ${(props) => props.theme.lightGray};
+  background-color: ${(props) => props.theme.colors.white};
+  border-bottom: 1px solid ${(props) => props.theme.colors.lightGray};
 `;
 
 export const StyledHeaderWrapper = styled.div`
@@ -31,7 +31,7 @@ export const StyledLogoWrapper = styled.div`
 export const StyledLogo = styled.div`
   width: 2.8125rem;
   height: 2.8125rem;
-  background: ${(props) => props.theme.primary};
+  background: ${(props) => props.theme.colors.primary};
   position: relative;
   border-radius: ${(props) => props.theme.defaultBorderRadius};
 `;
@@ -50,7 +50,7 @@ export const StyledLogoSpan = styled.span`
 
 // ***Footer
 export const StyledFooter = styled.footer`
-  border-top: 1px solid ${(props) => props.theme.lightGray};
+  border-top: 1px solid ${(props) => props.theme.colors.lightGray};
 `;
 
 export const StyledFooterWrapper = styled.div`
@@ -60,7 +60,7 @@ export const StyledFooterWrapper = styled.div`
 `;
 
 export const StyledFooterText = styled.span`
-  color: ${(props) => (props.Gray ? props.theme.gray : ``)};
+  color: ${(props) => (props.Gray ? props.theme.colors.gray : ``)};
 `;
 
 export const StyledAppFooter = styled.footer`
