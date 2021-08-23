@@ -1,4 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { theme } from "../../styles/ThemeConfig.js";
+
+const { colors } = theme;
 
 export const StyledLabel = styled.span`
   display: block;
@@ -24,12 +27,11 @@ export const StyledHeadingOne = styled.h1`
   }
   ${(props) =>
     props.themeStyle === "small"
-      ? `
-  @media (min-width: 992px) {
-    font-size: 2.25rem;
-  }
-  
-  `
+      ? css`
+          @media (min-width: 992px) {
+            font-size: 2.25rem;
+          }
+        `
       : ``};
 `;
 
@@ -60,4 +62,27 @@ export const StyledHeadingSix = styled.h6`
   @media (min-width: 992px) {
     font-size: 1rem;
   }
+`;
+
+export const StyledAppHeading = styled.h1`
+  font-size: 2rem;
+  font-weight: 700;
+  color: ${colors.appHeadings};
+`;
+
+export const StyledAppHeadingLabel = styled.h2`
+  font-size: 1.45rem;
+  ${(props) =>
+    props.themeStyle === "small"
+      ? css`
+          font-size: 1.25rem;
+        `
+      : ``};
+  color: ${colors.appHeadings};
+  font-weight: 600;
+`;
+
+export const StyledAppContent = styled.div`
+  font-size: 0.9rem;
+  color: ${colors.appBody};
 `;

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-sortable-tree-patch-react-17/style.css";
 import { ThemeProvider } from "styled-components";
+import { theme, GlobalStyle } from "styles/ThemeConfig";
 import ProjectWizardProvider from "providers/ProjectWizardProvider";
 import ProjectProvider from "providers/ProjectProvider";
-import { theme, GlobalStyle } from "styles/ThemeConfig";
 
 class MyApp extends Component {
   render() {

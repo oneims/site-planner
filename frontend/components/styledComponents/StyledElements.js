@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { darken } from "polished";
+import { darken, lighten } from "polished";
 import { theme } from "../../styles/ThemeConfig.js";
 
 // ***Elements
@@ -32,6 +32,46 @@ export const StyledButton = styled.button`
       : ``};
   ${(props) =>
     props.state === "disabled"
+      ? `
+        transition: 0.2s ease;
+        background-color: #888;
+        pointer-events: none;
+        color: #fff;
+      `
+      : ``};
+`;
+
+export const StyledPrivateButton = styled.button`
+  background-color: ${theme.colors.appButtonBackground};
+  border-color: ${theme.colors.appButtonBorder};
+  color: ${theme.colors.appButtonText};
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+  font-weight: 400;
+  text-align: center;
+  user-select: none;
+  font-size: 0.85rem;
+  transition: all 0.15s ease-out;
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+  padding: 0.45rem 1rem;
+  &:active {
+    transform: scale(1.04);
+    background-color: ${lighten(0.1, theme.colors.appButtonBackground)};
+  }
+  &:hover {
+    transition: all 0.15s ease-out;
+    background-color: ${darken(0.05, theme.colors.appButtonBackground)};
+  }
+  ${(props) =>
+    props.themeState === "disabled"
       ? `
         transition: 0.2s ease;
         background-color: #888;

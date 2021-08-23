@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 // ***Wrappers
 
@@ -66,13 +66,30 @@ export const StyledAsideWrapper = styled.div`
   padding-left: 15px;
   padding-right: 15px;
   width: 100%;
-  max-width: 350px;
+  transition: 0.25s ease;
+  ${(props) =>
+    props.themeStyle === "expanded"
+      ? css`
+          max-width: 100%;
+        `
+      : css`
+          max-width: 450px;
+        `};
 `;
 
 export const StyledViewPortWrapper = styled.div`
   padding-left: 15px;
   padding-right: 15px;
   width: 100%;
+  transition: 0.25s ease;
+  ${(props) =>
+    props.themeStyle === "collapsed"
+      ? css`
+          width: 0;
+          opacity: 0;
+          padding: 0;
+        `
+      : css``};
 `;
 
 export const StyledAside = styled.aside`
@@ -81,16 +98,24 @@ export const StyledAside = styled.aside`
   background-color: #f7f9fb;
   border-radius: 15px;
   border: 2px solid #eee;
-  padding-left: 30px;
-  padding-right: 30px;
+`;
+
+export const StyledPannel = styled.div`
+  padding-left: 15px;
+  padding-right: 15px;
+  ${(props) =>
+    props.themeStyle === "topCurved"
+      ? css`
+          border-top-right-radius: 15px;
+          border-top-left-radius: 15px;
+        `
+      : ``};
 `;
 
 export const StyledViewPort = styled.div`
   width: 100%;
   background-color: #f7f9fb;
   border-radius: 15px;
-  padding-left: 30px;
-  padding-right: 30px;
   height: 80vh;
   overflow-y: scroll;
   border: 2px solid #eee;
