@@ -98,6 +98,20 @@ export const GlobalStyle = createGlobalStyle`
   box-shadow: 0 0 0 1px #cbd6e2;
 }
 
+.react-transform-wrapper {
+  &.theme__transform-wrapper {
+    height: 100%;
+    width: 100%;
+    cursor: grab;
+  }
+}
+
+.react-transform-component {
+  &.theme__transform-component {
+    cursor: grab;
+  }
+}
+
 
 // ******* THEME ******
 

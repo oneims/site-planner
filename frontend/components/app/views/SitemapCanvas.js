@@ -5,9 +5,9 @@ import { StyledSitemap } from "@/components/styledComponents/StyledElements";
 const SitemapCanvas = () => {
   return (
     <>
-      <StyledContentBox className="text-center theme__min-width-2000 theme__min-height-2000">
+      <StyledContentBox>
         <StyledSitemap>
-          <ul class="tree">
+          <ul className="tree">
             <li>
               <span>Header Sitemap</span>
               <ul>
@@ -68,6 +68,64 @@ const SitemapCanvas = () => {
                     <li>
                       <span>Social media</span>
                       <ul>
+                        <li>
+                          <span>Facebook</span>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <span>Contact us</span>
+                  <ul>
+                    <li>
+                      <span>Social media</span>
+                      <ul>
+                        <li>
+                          <span>Facebook</span>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <span>Contact us</span>
+                  <ul>
+                    <li>
+                      <span>Social media</span>
+                      <ul>
+                        <li>
+                          <span>Facebook</span>
+                          <ul>
+                            <li>
+                              <span>Facebook</span>
+                              <ul>
+                                <li>
+                                  <span>Facebook</span>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <span>Contact us</span>
+                  <ul>
+                    <li>
+                      <span>Social media</span>
+                      <ul>
+                        <li>
+                          <span>Facebook</span>
+                        </li>
+                        <li>
+                          <span>Facebook</span>
+                        </li>
+                        <li>
+                          <span>Facebook</span>
+                        </li>
                         <li>
                           <span>Facebook</span>
                         </li>
