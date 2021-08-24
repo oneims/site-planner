@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { darken, lighten } from "polished";
 import { theme } from "../../styles/ThemeConfig.js";
 
@@ -197,3 +197,117 @@ export const ColorStyles = {
     };
   },
 };
+
+// Sitemap Canvas
+
+const SitemapTab = css`
+  background-color: ${theme.colors.appButtonBackground};
+  border-color: ${theme.colors.appButtonBorder};
+  color: ${theme.colors.appButtonText};
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+  font-weight: 400;
+  text-align: center;
+  user-select: none;
+  font-size: 0.85em;
+  transition: all 0.15s ease-out;
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+  padding: 0.85em 1.5em;
+`;
+
+export const StyledSitemap = styled.div`
+  .tree,
+  .tree ul,
+  .tree li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  .tree {
+    margin: 0 0 1em;
+    text-align: center;
+  }
+  .tree,
+  .tree ul {
+    display: table;
+  }
+  .tree ul {
+    width: 100%;
+  }
+  .tree li {
+    display: table-cell;
+    padding: 0.5em 0;
+    vertical-align: top;
+  }
+
+  .tree li:before {
+    outline: solid 1px #cbd6e2;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .tree li:first-child:before {
+    left: 50%;
+  }
+  .tree li:last-child:before {
+    right: 50%;
+  }
+
+  .tree code {
+    border: solid 0.1em #cbd6e2;
+    border-radius: 0.2em;
+    display: inline-block;
+    margin: 0 0.2em 0.5em;
+    padding: 0.2em 0.5em;
+    position: relative;
+  }
+
+  .tree span {
+    margin: 0 0.2em 0.5em;
+    position: relative;
+    ${SitemapTab}
+    overflow: unset;
+    vertical-align: unset;
+  }
+  .tree code {
+    font-family: monaco, Consolas, "Lucida Console", monospace;
+  }
+
+  .tree ul:before,
+  .tree code:before,
+  .tree span:before {
+    outline: solid 1px #cbd6e2;
+    content: "";
+    height: 0.5em;
+    left: 50%;
+    position: absolute;
+  }
+  .tree ul:before {
+    top: -0.5em;
+  }
+  .tree code:before,
+  .tree span:before {
+    top: -0.55em;
+  }
+  .tree > li {
+    margin-top: 0;
+  }
+  .tree > li:before,
+  .tree > li:after,
+  .tree > li > code:before,
+  .tree > li > span:before {
+    outline: none;
+  }
+`;

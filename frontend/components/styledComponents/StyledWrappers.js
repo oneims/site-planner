@@ -81,6 +81,7 @@ export const StyledViewPortWrapper = styled.div`
   padding-left: 15px;
   padding-right: 15px;
   width: 100%;
+  max-width: calc(100% - 450px);
   transition: 0.25s ease;
   ${(props) =>
     props.themeStyle === "collapsed"
@@ -101,13 +102,20 @@ export const StyledAside = styled.aside`
 `;
 
 export const StyledPannel = styled.div`
-  padding-left: 15px;
-  padding-right: 15px;
+  transition: 0.25s ease;
   ${(props) =>
     props.themeStyle === "topCurved"
       ? css`
           border-top-right-radius: 15px;
           border-top-left-radius: 15px;
+        `
+      : ``};
+  ${(props) =>
+    props.displayStyle === "expanded"
+      ? css`
+          padding-top: 0.5rem !important;
+          padding-bottom: 0.5rem !important;
+          transition: 0.25s ease;
         `
       : ``};
 `;

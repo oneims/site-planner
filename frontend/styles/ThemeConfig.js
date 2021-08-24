@@ -41,6 +41,9 @@ export const GlobalStyle = createGlobalStyle`
     background-color: #f5f8fa;
     font-weight: 500;
   }
+  &__nodeContent {
+    z-index: 1;
+  }
   &__row {
     border-radius: 3px;
     border: 1px solid #cbd6e2;
@@ -285,6 +288,15 @@ h6,
 }
 
 .theme {
+  &__viewport-padding {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  &__min-width {
+    &-2000 {
+      min-width: 2000px;
+    }
+  }
   &__min-height {
     &-400 {
       min-height: 400px;
@@ -294,6 +306,12 @@ h6,
     }
     &-600 {
       min-height: 600px;
+    }
+    &-100 {
+      min-height: 100%;
+    }
+    &-2000 {
+      min-height: 2000px;
     }
   }
   &__height {
@@ -320,6 +338,9 @@ h6,
     }
     &-80vh {
       height: 80vh;
+    }
+    &-100 {
+      height: 100%;
     }
   }
   &__overflow {
@@ -361,6 +382,25 @@ h6,
     &-bg-white {
       background-color: ${theme.colors.white};
     }
+  }
+  &__position {
+    &-sticky {
+      position: sticky;
+    }
+  }
+  &__top {
+    &-0 {
+      top: 0;
+    }
+  }
+  &__z-index {
+    &-1 {
+      z-index: 1;
+    }
+  }
+  &__canvas-background {
+    background-image: radial-gradient(circle at 1px 1px, #5371939e 1px, transparent 0);
+    background-size: 40px 40px;
   }
 }
 

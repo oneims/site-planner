@@ -32,7 +32,6 @@ class EditorAside extends Component {
 
   render() {
     const getNodeKey = ({ treeIndex }) => treeIndex;
-    const getRandomName = () => "Random Item";
     return (
       <>
         <StyledAsideWrapper
@@ -40,10 +39,11 @@ class EditorAside extends Component {
           className="theme__overflow-hidden"
         >
           <StyledAside>
-            <StyledContentBox>
+            <StyledContentBox className="d-flex flex-column theme__height-100">
               <StyledPannel
                 themeStyle="topCurved"
-                className="theme__solids-bg-white pt-4 pb-4 theme__border-bottom"
+                displayStyle={this.props.editorExpanded ? "expanded" : "collapsed"}
+                className="theme__viewport-padding theme__solids-bg-white pt-4 pb-4 theme__border-bottom"
               >
                 <StyledContentBox className="d-flex align-items-center justify-content-between">
                   <StyledAppHeadingLabel className="mb-0">Editor</StyledAppHeadingLabel>
@@ -52,7 +52,7 @@ class EditorAside extends Component {
                   </StyledPrivateButton>
                 </StyledContentBox>
               </StyledPannel>
-              <StyledPannel className="my-3 mx-2 theme__solids-bg-white pt-4 pb-4 theme__border theme__border-radius-10 theme__height-62vh theme__overflow-y">
+              <StyledPannel className="theme__viewport-padding theme__height-100 my-3 mx-2 theme__solids-bg-white pt-4 pb-4 theme__border theme__border-radius-10 theme__height-62vh theme__overflow-y">
                 <StyledAppHeadingLabel themeStyle="small" className="mb-0">
                   Build Your Sitemap
                 </StyledAppHeadingLabel>
