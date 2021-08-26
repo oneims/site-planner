@@ -2,138 +2,34 @@ import React from "react";
 import { StyledContentBox } from "@/components/styledComponents/StyledWrappers";
 import { StyledSitemap } from "@/components/styledComponents/StyledElements";
 
-const SitemapCanvas = () => {
+const MenuGenerator = (items) => {
+  items = Array.from(items);
+  return items.map((item, index) => {
+    return (
+      <li key={index} className={item.children ? `has-children` : undefined}>
+        <span className={item.name.trim().length < 1 ? `invalid` : undefined}>
+          {item.name.trim().length > 0 ? item.name : `...`}
+        </span>
+        {item.children && item.children.length > 0 ? <ul>{MenuGenerator(item.children)}</ul> : null}
+      </li>
+    );
+  });
+};
+
+const SitemapCanvas = ({ treeData, canvasZoom }) => {
   return (
     <>
-      <StyledContentBox>
-        <StyledSitemap>
+      <StyledContentBox className="theme__min-height-2000 theme__min-width-2000">
+        <StyledSitemap
+          style={{
+            transform: `translateX(${canvasZoom.translateX}px) translateY(${canvasZoom.translateY}px) scale(${canvasZoom.scale})`,
+            transition: `0.2s ease`,
+          }}
+        >
           <ul className="tree">
             <li>
               <span>Header Sitemap</span>
-              <ul>
-                <li>
-                  <span>About us</span>
-                  <ul>
-                    <li>
-                      <span>Our history</span>
-                      <ul>
-                        <li>
-                          <span>Founder</span>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <span>Our board</span>
-                      <ul>
-                        <li>
-                          <span>Brad Whiteman</span>
-                        </li>
-                        <li>
-                          <span>Cynthia Tolken</span>
-                        </li>
-                        <li>
-                          <span>Bobby Founderson</span>
-                        </li>
-                        <li>
-                          <span>Anzil</span>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <span>Our products</span>
-                  <ul>
-                    <li>
-                      <span>The Widget 2000™</span>
-                      <ul>
-                        <li>
-                          <span>Order form</span>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <span>The McGuffin V2</span>
-                      <ul>
-                        <li>
-                          <span>Order form</span>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <span>Contact us</span>
-                  <ul>
-                    <li>
-                      <span>Social media</span>
-                      <ul>
-                        <li>
-                          <span>Facebook</span>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <span>Contact us</span>
-                  <ul>
-                    <li>
-                      <span>Social media</span>
-                      <ul>
-                        <li>
-                          <span>Facebook</span>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <span>Contact us</span>
-                  <ul>
-                    <li>
-                      <span>Social media</span>
-                      <ul>
-                        <li>
-                          <span>Facebook</span>
-                          <ul>
-                            <li>
-                              <span>Facebook</span>
-                              <ul>
-                                <li>
-                                  <span>Facebook</span>
-                                </li>
-                              </ul>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <span>Contact us</span>
-                  <ul>
-                    <li>
-                      <span>Social media</span>
-                      <ul>
-                        <li>
-                          <span>Facebook</span>
-                        </li>
-                        <li>
-                          <span>Facebook</span>
-                        </li>
-                        <li>
-                          <span>Facebook</span>
-                        </li>
-                        <li>
-                          <span>Facebook</span>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+              <ul>{MenuGenerator(treeData)}</ul>
             </li>
           </ul>
         </StyledSitemap>

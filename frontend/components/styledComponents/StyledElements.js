@@ -280,6 +280,11 @@ export const StyledSitemap = styled.div`
     ${SitemapTab}
     overflow: unset;
     vertical-align: unset;
+    &.invalid {
+      background-color: #ff606085;
+      transition: 0.2s ease;
+      color: #fff;
+    }
   }
   .tree code {
     font-family: monaco, Consolas, "Lucida Console", monospace;
@@ -310,4 +315,24 @@ export const StyledSitemap = styled.div`
   .tree > li > span:before {
     outline: none;
   }
+
+  // Customizations
+
+  // li {
+  //   &.has-nested-children {
+  //     > ul {
+  //       display: flex;
+  //       flex-direction: column;
+  //       > li {
+  //         &:before {
+  //           display: none;
+  //         }
+  //         padding-bottom: 0;
+  //         > span {
+  //           margin-bottom: 0;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 `;

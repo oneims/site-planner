@@ -52,8 +52,8 @@ export const StyledAppWrapper = styled.section`
 
 export const StyledAppContent = styled.div`
   display: flex;
-  margin-left: -15px;
-  margin-right: -15px;
+  margin-left: -8px;
+  margin-right: -8px;
 `;
 
 export const StyledAppBlock = styled.div`
@@ -63,8 +63,8 @@ export const StyledAppBlock = styled.div`
 `;
 
 export const StyledAsideWrapper = styled.div`
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 8px;
+  padding-right: 8px;
   width: 100%;
   transition: 0.25s ease;
   ${(props) =>
@@ -78,8 +78,8 @@ export const StyledAsideWrapper = styled.div`
 `;
 
 export const StyledViewPortWrapper = styled.div`
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 8px;
+  padding-right: 8px;
   width: 100%;
   max-width: calc(100% - 450px);
   transition: 0.25s ease;

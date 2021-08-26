@@ -102,13 +102,14 @@ export const GlobalStyle = createGlobalStyle`
   &.theme__transform-wrapper {
     height: 100%;
     width: 100%;
-    cursor: grab;
+    // overflow: unset;
+    // cursor: grab;
   }
 }
 
 .react-transform-component {
   &.theme__transform-component {
-    cursor: grab;
+    // cursor: grab;
   }
 }
 

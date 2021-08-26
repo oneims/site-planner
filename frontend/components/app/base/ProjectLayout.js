@@ -17,7 +17,7 @@ const StyledMain = styled.main`
   overflow: hidden;
 `;
 
-export class ProjectLayout extends Component {
+class ProjectLayout extends Component {
   render() {
     return (
       <>

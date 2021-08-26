@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 
-const SitemapOverview = () => {
+const SitemapOverview = (props) => {
   const [editorExpanded, setEditorExpanded] = useState(false);
   const [editorExpandedButtonText, setEditorExpandedButtonText] = useState("Expand");
 
@@ -35,11 +35,12 @@ const SitemapOverview = () => {
         <Container fluid>
           <StyledAppContent>
             <EditorAside
+              {...props}
               editorExpanded={editorExpanded}
               editorExpandedButtonText={editorExpandedButtonText}
               handleEditorExpanded={handleEditorExpanded}
             />
-            <EditorViewport editorExpanded={editorExpanded} />
+            <EditorViewport {...props} editorExpanded={editorExpanded} />
           </StyledAppContent>
         </Container>
       </StyledAppWrapper>
