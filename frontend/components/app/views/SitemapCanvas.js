@@ -6,11 +6,26 @@ const MenuGenerator = (items) => {
   items = Array.from(items);
   return items.map((item, index) => {
     return (
-      <li key={index} className={item.children ? `has-children` : undefined}>
-        <span className={item.name.trim().length < 1 ? `invalid` : undefined}>
-          {item.name.trim().length > 0 ? item.name : `...`}
-        </span>
-        {item.children && item.children.length > 0 ? <ul>{MenuGenerator(item.children)}</ul> : null}
+      <li
+        key={index}
+        className={`tree-leaf ${index === 0 && items.length > 1 ? "first" : "child"} ${
+          index === items.length - 1 && items.length > 1 ? "last" : ""
+        } ${items.length === 1 ? "single" : ""}`}
+      >
+        <div className={`tree-node`}>
+          <div className="page-drop-target tbefore">
+            <div className="drop-box"></div>
+          </div>
+          <div className={`page ${!item.children ? "nochilds" : ""}`}>
+            {item.name.trim().length > 0 ? item.name : `...`}
+          </div>
+          <div className="page-drop-target tafter">
+            <div className="drop-box"></div>
+          </div>
+        </div>
+        {item.children && item.children.length > 0 ? (
+          <ul className="tree-children">{MenuGenerator(item.children)}</ul>
+        ) : null}
       </li>
     );
   });
@@ -26,12 +41,16 @@ const SitemapCanvas = ({ treeData, canvasZoom }) => {
             transition: `0.2s ease`,
           }}
         >
-          <ul className="tree">
-            <li>
-              <span>Header Sitemap</span>
-              <ul>{MenuGenerator(treeData)}</ul>
-            </li>
-          </ul>
+          <div className="tree-con mix-view">
+            <ul className="tree-children root">
+              <li className="tree-leaf root">
+                <div className="tree-node">
+                  <div className="page page-root">Header Sitemap</div>
+                </div>
+                <ul className="tree-children">{MenuGenerator(treeData)}</ul>
+              </li>
+            </ul>
+          </div>
         </StyledSitemap>
       </StyledContentBox>
     </>

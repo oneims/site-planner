@@ -69,14 +69,21 @@ const EditorViewport = (props) => {
           </StyledContentBox>
         </StyledPannel>
         <StyledPannel className="theme__viewport-padding theme__solids-bg-white pt-2 pb-2 theme__border-bottom theme__position-sticky theme__top-0 theme__z-index-1">
-          <div className="tools">
-            <StyledPrivateButton className="mr-1" onClick={() => zoomIn()}>
-              +
-            </StyledPrivateButton>
-            <StyledPrivateButton className="mr-1" onClick={() => zoomOut()}>
-              -
-            </StyledPrivateButton>
-            <StyledPrivateButton onClick={() => resetZoom()}>Reset</StyledPrivateButton>
+          <div className="d-flex align-items-center justify-content-between">
+            <div className="tools">
+              <StyledPrivateButton className="mr-1" onClick={() => zoomIn()}>
+                +
+              </StyledPrivateButton>
+              <StyledPrivateButton className="mr-1" onClick={() => zoomOut()}>
+                -
+              </StyledPrivateButton>
+              <StyledPrivateButton onClick={() => resetZoom()}>Reset</StyledPrivateButton>
+            </div>
+            <div className="tools">
+              <StyledPrivateButton className="mr-1">Primary Color</StyledPrivateButton>
+              <StyledPrivateButton className="mr-1">Secondary Color</StyledPrivateButton>
+              <StyledPrivateButton>Map View</StyledPrivateButton>
+            </div>
           </div>
         </StyledPannel>
         <StyledContentBox className="pl-4 pr-4 pt-5 theme__height-100 theme__overflow-y theme__overflow-x theme__canvas-background">
