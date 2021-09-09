@@ -91,6 +91,12 @@ export const StyledViewPortWrapper = styled.div`
           padding: 0;
         `
       : css``};
+  ${(props) =>
+    props.themeStyle === "fullWidth"
+      ? css`
+          max-width: 100%;
+        `
+      : css``};
 `;
 
 export const StyledAside = styled.aside`

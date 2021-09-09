@@ -7,7 +7,7 @@ import {
 } from "@/components/styledComponents/StyledWrappers";
 import {
   StyledAppHeadingLabel,
-  StyledAppContent,
+  StyledAppContentTypography,
 } from "@/components/styledComponents/StyledTypography";
 import { StyledPrivateButton } from "@/components/styledComponents/StyledElements";
 import SitemapCanvas from "@/components/app/views/SitemapCanvas";
@@ -61,9 +61,10 @@ const EditorViewport = (props) => {
               <StyledAppHeadingLabel className="mb-2 d-flex" style={{ lineHeight: "1" }}>
                 Company Name
               </StyledAppHeadingLabel>
-              <StyledAppContent>Header Sitemap</StyledAppContent>
+              <StyledAppContentTypography>Header Sitemap</StyledAppContentTypography>
             </StyledContentBox>
             <StyledContentBox>
+              <StyledPrivateButton className="mr-2">Save</StyledPrivateButton>
               <StyledPrivateButton>Preview</StyledPrivateButton>
             </StyledContentBox>
           </StyledContentBox>

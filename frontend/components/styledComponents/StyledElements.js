@@ -155,6 +155,37 @@ export const StyledInput = styled.input`
   }
 `;
 
+// Theme Card
+export const StyledSitemapCard = styled.div`
+  background-color: ${theme.colors.white};
+  border: 2px solid ${theme.colors.borderColor};
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .show-on-hover {
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.2s ease;
+    pointer-events: all;
+  }
+  &:hover {
+    .show-on-hover {
+      opacity: 1;
+      transition: 0.2s ease;
+      visibility: visible;
+      pointer-events: all;
+    }
+  }
+`;
+
+export const StyledSitemapCardContent = styled.div``;
+
+export const StyledSitemapTop = styled.div`
+  height: 70px;
+  background-color: ${theme.colors.primary};
+`;
+
 // React Select
 export const ColorStyles = {
   control: (styles, { isFocused }) => {

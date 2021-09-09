@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 export const theme = {
   colors: {
     primary: "#818cf8",
-    secondary: "#111827",
+    secondary: "#253342",
     headingColor: "#111827",
     bodyColor: "#4b505a",
     purple: "#a855f7",
@@ -96,6 +96,17 @@ export const GlobalStyle = createGlobalStyle`
 
 .rst__collapseButton, .rst__expandButton {
   box-shadow: 0 0 0 1px #cbd6e2;
+}
+
+.rst__nodeContent { 
+  transition: 0.2s ease;
+}
+
+.tree-parent {
+  .rst__nodeContent {
+    min-width: 700px;
+    transition: 0.2s ease;
+  }
 }
 
 .react-transform-wrapper {
@@ -373,6 +384,10 @@ h6,
     border: 2px solid ${theme.colors.borderColor};
     &-radius-15 {
       border-radius: 15px;
+    }
+    &-radius-top-15 {
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
     }
     &-radius-4 {
       border-radius: 4px;

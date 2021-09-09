@@ -82,7 +82,29 @@ export const StyledAppHeadingLabel = styled.h2`
   font-weight: 600;
 `;
 
-export const StyledAppContent = styled.div`
+export const StyledAppContentTypography = styled.div`
   font-size: 0.9rem;
   color: ${colors.appBody};
+`;
+
+export const StyledTag = styled.span`
+  font-weight: 700;
+  font-size: 0.8rem;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  border: 2px solid ${theme.colors.borderColor};
+  vertical-align: inherit;
+  hyphens: manual;
+  border-radius: 3px;
+  line-height: 20px;
+  min-height: 20px;
+  background-color: #eaf0f6;
+  padding: 3px 8px;
+  display: inline-block;
+  ${(props) =>
+    props.themeStyle === "uppercase"
+      ? css`
+          text-transform: uppercase;
+        `
+      : ``};
 `;

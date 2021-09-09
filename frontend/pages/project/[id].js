@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/router";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import {
-  StyledAppBlock,
   StyledContentBox,
+  StyledPannel,
   StyledAppWrapper,
   StyledAppContent,
-  StyledAside,
-  StyledAsideWrapper,
   StyledViewPort,
   StyledViewPortWrapper,
 } from "@/components/styledComponents/StyledWrappers";
-import { StyledHeadingOne } from "@/components/styledComponents/StyledTypography";
+import { StyledAppHeadingLabel, StyledTag } from "@/components/styledComponents/StyledTypography";
+import SitemapCard from "@/components/app/views/SitemapCard";
 
 const ProjectOverview = () => {
   const router = useRouter();
@@ -27,16 +26,28 @@ const ProjectOverview = () => {
       <StyledAppWrapper>
         <Container fluid>
           <StyledAppContent>
-            <StyledAsideWrapper>
-              <StyledAside></StyledAside>
-            </StyledAsideWrapper>
-            <StyledViewPortWrapper>
+            <StyledViewPortWrapper themeStyle="fullWidth">
               <StyledViewPort>
-                <StyledAppBlock className="my-0">
-                  <StyledContentBox>
-                    <h2>Project Overview</h2>
+                <StyledPannel className="theme__viewport-padding theme__solids-bg-white pt-2 pb-2 theme__border-bottom theme__position-sticky theme__top-0 theme__z-index-1">
+                  <StyledContentBox className="pt-2 pb-2">
+                    <StyledAppHeadingLabel className="mb-0" style={{ lineHeight: "1" }}>
+                      Project Overview (Organization name will come here)
+                    </StyledAppHeadingLabel>
                   </StyledContentBox>
-                </StyledAppBlock>
+                </StyledPannel>
+                <StyledContentBox className="pl-4 pr-4 pt-4 mt-2 theme__viewport-padding theme__height-100 theme__overflow-y theme__overflow-x theme__canvas-background">
+                  <StyledContentBox className="mb-3">
+                    <StyledTag themeStyle="uppercase">Sitemaps</StyledTag>
+                  </StyledContentBox>
+                  <Row>
+                    <Col lg="3" className="mb-4">
+                      <SitemapCard title="Header Sitemap" />
+                    </Col>
+                    <Col lg="3" className="mb-4">
+                      <SitemapCard title="Footer Sitemap" />
+                    </Col>
+                  </Row>
+                </StyledContentBox>
               </StyledViewPort>
             </StyledViewPortWrapper>
           </StyledAppContent>

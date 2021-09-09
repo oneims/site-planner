@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import { Container } from "react-bootstrap";
 import {
@@ -13,12 +14,14 @@ import {
 import { StyledButton } from "@/components/styledComponents/StyledElements";
 
 const ProjectHeader = () => {
+  const router = useRouter();
+  const isEditor = router.query.sitemapParams;
   return (
     <>
       <StyledHeader>
         <Container fluid>
           <StyledHeaderWrapper>
-            <StyledHeaderColumn>
+            <StyledHeaderColumn className="d-flex">
               <Link href="/">
                 <StyledLogoWrapper>
                   <StyledLogo>
@@ -26,10 +29,21 @@ const ProjectHeader = () => {
                   </StyledLogo>
                 </StyledLogoWrapper>
               </Link>
+              {isEditor && (
+                <Link href="/project/ajo0s08zkl">
+                  <StyledButton
+                    className="ml-3"
+                    themeStyle="primary"
+                    // style={{ fontSize: "0.85rem" }}
+                  >
+                    Back To Project
+                  </StyledButton>
+                </Link>
+              )}
             </StyledHeaderColumn>
             <StyledHeaderColumn>
-              <Link href="/project-wizard/step-one">
-                <StyledButton themeStyle="primary">Add a New Sitemap</StyledButton>
+              <Link href="#">
+                <StyledButton themeStyle="primary">Email Me This Project</StyledButton>
               </Link>
             </StyledHeaderColumn>
           </StyledHeaderWrapper>

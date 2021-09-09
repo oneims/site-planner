@@ -16,7 +16,7 @@ const MenuGenerator = (items) => {
           <div className="page-drop-target tbefore">
             <div className="drop-box"></div>
           </div>
-          <div className={`page ${!item.children ? "nochilds" : ""}`}>
+          <div className={`page ${item.children && item.children.length > 0 ? "" : "nochilds"}`}>
             {item.name.trim().length > 0 ? item.name : `...`}
           </div>
           <div className="page-drop-target tafter">
