@@ -97,6 +97,12 @@ export const StyledViewPortWrapper = styled.div`
           max-width: 100%;
         `
       : css``};
+  ${(props) =>
+    props.themeWidth === "fullWidth"
+      ? css`
+          max-width: 100%;
+        `
+      : css``};
 `;
 
 export const StyledAside = styled.aside`
@@ -133,4 +139,10 @@ export const StyledViewPort = styled.div`
   height: 80vh;
   overflow-y: scroll;
   border: 2px solid #eee;
+  ${(props) =>
+    props.themeStyle === "largerHeight"
+      ? css`
+          height: calc(100vh - 3rem);
+        `
+      : ``};
 `;

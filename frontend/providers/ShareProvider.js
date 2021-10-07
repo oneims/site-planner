@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import ProjectLayout from "/components/app/base/ProjectLayout";
+import ShareLayout from "/components/app/base/ShareLayout";
 
-class ProjectProvider extends Component {
+class ShareProvider extends Component {
   state = {
     treeData: [
       {
@@ -49,6 +49,7 @@ class ProjectProvider extends Component {
       this.setState({
         treeData,
       });
+      console.log(this.state.treeData);
     },
     inputChange: (event, node, path, getNodeKey, changeNodeAtPath) => {
       const name = event.target.value;
@@ -93,41 +94,14 @@ class ProjectProvider extends Component {
     },
   };
 
-  handleColorPicker = {
-    show: (event) => {
-      const target = event.target.getAttribute("data-target");
-      const handler = event.target.getAttribute("data-handler");
-      console.log(target);
-      this.setState({ [target]: !this.state[target], activeColorPicker: handler });
-    },
-    close: (event) => {
-      const target = event.target.getAttribute("data-target");
-      this.setState({
-        displayPrimaryColorPicker: false,
-        displayBorderColorPicker: false,
-        displayTextColorPicker: false,
-        activeColorPicker: null,
-      });
-    },
-    change: (color) => {
-      const active = this.state.activeColorPicker;
-      this.setState({ [active]: color.rgb });
-    },
-  };
-
   render() {
     const { Component, pageProps } = this.props;
     return (
-      <ProjectLayout>
-        <Component
-          handleTree={this.handleTree}
-          handleColorPicker={this.handleColorPicker}
-          {...this.state}
-          {...pageProps}
-        />
-      </ProjectLayout>
+      <ShareLayout>
+        <Component handleTree={this.handleTree} {...this.state} {...pageProps} />
+      </ShareLayout>
     );
   }
 }
 
-export default ProjectProvider;
+export default ShareProvider;

@@ -5,6 +5,7 @@ import { ThemeProvider } from "styled-components";
 import { theme, GlobalStyle } from "styles/ThemeConfig";
 import ProjectWizardProvider from "providers/ProjectWizardProvider";
 import ProjectProvider from "providers/ProjectProvider";
+import ShareProvider from "providers/ShareProvider";
 
 class MyApp extends Component {
   render() {
@@ -24,6 +25,15 @@ class MyApp extends Component {
           <GlobalStyle />
           <ThemeProvider theme={theme}>
             <ProjectProvider {...this.props} />
+          </ThemeProvider>
+        </>
+      );
+    } else if (router.pathname.startsWith("/share/")) {
+      return (
+        <>
+          <GlobalStyle />
+          <ThemeProvider theme={theme}>
+            <ShareProvider {...this.props} />
           </ThemeProvider>
         </>
       );

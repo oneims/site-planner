@@ -30,6 +30,14 @@ export const theme = {
 
 export const GlobalStyle = createGlobalStyle`
 
+
+// **** COLOR POPVER *****
+
+  .chrome-picker {
+    box-shadow: ${theme.primaryBoxShadow} !important;
+    border-radius: 10px !important;
+  }
+
 // **** SORTABLE LIST *****
 .rst {
   &__rowContents {
@@ -155,6 +163,14 @@ textarea {
   &:focus {
     outline: none;
     box-shadow: none;
+  }
+}
+
+a {
+  font-weight: 700;
+  color: ${theme.colors.primary};
+  &:hover {
+    color: ${theme.colors.primary};
   }
 }
 
@@ -314,6 +330,14 @@ h6,
 }
 
 .theme {
+  &__position {
+    &-relative {
+      position: relative;
+    }
+    &-absolute {
+      position: absolute;
+    }
+  }
   &__viewport-padding {
     padding-left: 15px;
     padding-right: 15px;

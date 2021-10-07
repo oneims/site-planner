@@ -2,7 +2,7 @@ import React from "react";
 import { StyledContentBox } from "@/components/styledComponents/StyledWrappers";
 import { StyledSitemap } from "@/components/styledComponents/StyledElements";
 
-const MenuGenerator = (items) => {
+const MenuGenerator = (items, buttonStyles) => {
   items = Array.from(items);
   return items.map((item, index) => {
     return (
@@ -16,7 +16,10 @@ const MenuGenerator = (items) => {
           <div className="page-drop-target tbefore">
             <div className="drop-box"></div>
           </div>
-          <div className={`page ${item.children && item.children.length > 0 ? "" : "nochilds"}`}>
+          <div
+            style={buttonStyles}
+            className={`page ${item.children && item.children.length > 0 ? "" : "nochilds"}`}
+          >
             {item.name.trim().length > 0 ? item.name : `...`}
           </div>
           <div className="page-drop-target tafter">
@@ -24,17 +27,30 @@ const MenuGenerator = (items) => {
           </div>
         </div>
         {item.children && item.children.length > 0 ? (
-          <ul className="tree-children">{MenuGenerator(item.children)}</ul>
+          <ul className="tree-children">{MenuGenerator(item.children, buttonStyles)}</ul>
         ) : null}
       </li>
     );
   });
 };
 
-const SitemapCanvas = ({ treeData, canvasZoom }) => {
+const SitemapCanvas = ({
+  shareMode,
+  treeData,
+  canvasZoom,
+  primaryColor,
+  borderColor,
+  textColor,
+}) => {
+  const buttonStyles = {
+    backgroundColor: `rgba(${primaryColor.r}, ${primaryColor.g}, ${primaryColor.b}, ${primaryColor.a})`,
+    borderColor: `rgba(${borderColor.r}, ${borderColor.g}, ${borderColor.b}, ${borderColor.a})`,
+    color: `rgba(${textColor.r}, ${textColor.g}, ${textColor.b}, ${textColor.a})`,
+  };
+
   return (
     <>
-      <StyledContentBox className="theme__min-height-2000 theme__min-width-2000">
+      <StyledContentBox className={!shareMode && `theme__min-height-2000 theme__min-width-2000`}>
         <StyledSitemap
           style={{
             transform: `translateX(${canvasZoom.translateX}px) translateY(${canvasZoom.translateY}px) scale(${canvasZoom.scale})`,
@@ -45,9 +61,11 @@ const SitemapCanvas = ({ treeData, canvasZoom }) => {
             <ul className="tree-children root">
               <li className="tree-leaf root">
                 <div className="tree-node">
-                  <div className="page page-root">Header Sitemap</div>
+                  <div style={buttonStyles} className="page page-root">
+                    Header Sitemap
+                  </div>
                 </div>
-                <ul className="tree-children">{MenuGenerator(treeData)}</ul>
+                <ul className="tree-children">{MenuGenerator(treeData, buttonStyles)}</ul>
               </li>
             </ul>
           </div>
