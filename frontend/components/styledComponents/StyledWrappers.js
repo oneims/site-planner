@@ -107,7 +107,7 @@ export const StyledViewPortWrapper = styled.div`
 
 export const StyledAside = styled.aside`
   width: 100%;
-  height: 80vh;
+  height: calc(100vh - 120px);
   background-color: #f7f9fb;
   border-radius: 15px;
   border: 2px solid #eee;
@@ -136,7 +136,7 @@ export const StyledViewPort = styled.div`
   width: 100%;
   background-color: #f7f9fb;
   border-radius: 15px;
-  height: 80vh;
+  height: calc(100vh - 120px);
   overflow-y: scroll;
   border: 2px solid #eee;
   ${(props) =>
