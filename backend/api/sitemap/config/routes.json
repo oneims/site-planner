@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/sitemaps",
+      "handler": "sitemap.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/sitemaps/count",
+      "handler": "sitemap.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/sitemaps/:id",
+      "handler": "sitemap.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/sitemaps",
+      "handler": "sitemap.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/sitemaps/:id",
+      "handler": "sitemap.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/sitemaps/:id",
+      "handler": "sitemap.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

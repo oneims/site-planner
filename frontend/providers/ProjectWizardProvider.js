@@ -1,5 +1,9 @@
 import React, { Component } from "react";
+import Router from "next/router";
+import axios from "axios";
 import WizardLayout from "/components/app/base/WizardLayout";
+import { generateUID, sleeper } from "/lib/Helpers";
+import { Schema__001 } from "/lib/SitemapSchema";
 
 class ProjectWizardProvider extends Component {
   state = {
@@ -140,10 +144,90 @@ class ProjectWizardProvider extends Component {
     this.updateStepThreeButtonState();
   };
 
+  handleSubmit = () => {
+    const { project_name, project_industry, number_of_pages } = this.state;
+    const PROJECT_UID = generateUID(process.env.NEXT_PUBLIC_UID_THRESHOLD);
+    const SITEMAP_UID = generateUID(process.env.NEXT_PUBLIC_UID_THRESHOLD);
+    const NEW_URL = `/project/${PROJECT_UID}/sitemap/${SITEMAP_UID}`;
+    this.setState({
+      loading: true,
+    });
+    const projectData = {
+      name: project_name,
+      industry: project_industry.value,
+      number_of_pages: number_of_pages.value,
+      UID: PROJECT_UID,
+    };
+    const sitemapData = {
+      UID: SITEMAP_UID,
+      title: "Untitled Sitemap",
+      menu_schema: Schema__001,
+      primary_color: {
+        r: "234",
+        g: "240",
+        b: "246",
+        a: "1",
+      },
+      border_color: {
+        r: "203",
+        g: "214",
+        b: "226",
+        a: "1",
+      },
+      text_color: {
+        r: "80",
+        g: "110",
+        b: "145",
+        a: "1",
+      },
+    };
+    axios
+      .all([
+        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/projects`, projectData),
+        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/sitemaps`, sitemapData),
+      ])
+      .then(sleeper(900))
+      .then(
+        axios.spread((projectResponse, sitemapResponse) => {
+          console.log(projectResponse, sitemapResponse);
+          const projectDBID = projectResponse.data.id;
+          const sitemapDBID = sitemapResponse.data.id;
+          axios
+            .put(`${process.env.NEXT_PUBLIC_API_URL}/projects/${projectDBID}`, {
+              sitemaps: sitemapDBID,
+            })
+            .then((res) => {
+              localStorage.clear();
+              Router.push(NEW_URL);
+              this.setState({
+                loading: false,
+              });
+            })
+            .catch((err) => {
+              alert("Oops, something went wrong! Please try again later.");
+              console.log(err);
+            });
+        })
+      )
+      .catch((err) => {
+        this.setState({
+          loading: false,
+        });
+        alert("Oops, something went wrong! Please try again later.");
+        console.log(err);
+      });
+  };
+
   render() {
     const { Component, pageProps } = this.props;
-    const { currentStep, backDestination, nextDestination, nextButtonText, nextButtonState } =
-      this.state;
+    const {
+      currentStep,
+      backDestination,
+      nextDestination,
+      nextButtonText,
+      nextButtonState,
+      loading,
+    } = this.state;
     return (
       <WizardLayout
         currentStep={currentStep}
@@ -151,6 +235,8 @@ class ProjectWizardProvider extends Component {
         nextDestination={nextDestination}
         nextButtonText={nextButtonText}
         nextButtonState={nextButtonState}
+        handleSubmit={this.handleSubmit}
+        loading={loading}
       >
         <Component
           handleChange={this.handleChange}

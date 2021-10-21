@@ -15,7 +15,6 @@ const SitemapOverview = (props) => {
   if (!sitemapParams) {
     return null;
   }
-
   const sitemapID = sitemapParams.slice(-1)[0];
   const projectID = sitemapParams[0];
 

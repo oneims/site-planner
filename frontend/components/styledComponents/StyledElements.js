@@ -229,9 +229,38 @@ export const ColorStyles = {
   },
 };
 
+// Loader
+export const StyledLoader = styled.div`
+  animation: rotation 0.6s infinite linear;
+  border: 2px solid ${theme.colors.primary};
+  border-radius: 50%;
+  border-top-color: #fff;
+  height: 3em;
+  width: 3em;
+  display: block;
+`;
+
+export const StyledLoaderWrapper = styled.div`
+  position: ${(props) => (props.Fixed ? "fixed" : "absolute")};
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: ${(props) => (props.OverridePage ? "999999999999" : "999")};
+  background-color: ${(props) => (props.White ? "rgba(255, 255, 255, 0.8)" : "")};
+  background-color: ${(props) => (props.WhiteLess ? "rgba(255, 255, 255, 0.5)" : "")};
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  transition: 0.2s ease;
+`;
+
 // Sitemap Canvas
 
-const SitemapTab = css`
+export const SitemapTab = css`
   background-color: ${theme.colors.appButtonBackground};
   border-color: ${theme.colors.appButtonBorder};
   color: ${theme.colors.appButtonText};

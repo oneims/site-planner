@@ -75,6 +75,7 @@ const EditorViewport = (props) => {
     textColor,
     displayTextColorPicker,
     handleColorPicker,
+    title,
   } = props;
 
   return (
@@ -120,7 +121,7 @@ const EditorViewport = (props) => {
                   <StyledAppHeadingLabel className="mb-2 d-flex" style={{ lineHeight: "1" }}>
                     Company Name
                   </StyledAppHeadingLabel>
-                  <StyledAppContentTypography>Header Sitemap</StyledAppContentTypography>
+                  <StyledAppContentTypography>{title}</StyledAppContentTypography>
                 </StyledContentBox>
                 <StyledContentBox>
                   <StyledPrivateButton className="mr-2">Save</StyledPrivateButton>

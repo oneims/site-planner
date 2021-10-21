@@ -3,6 +3,7 @@ import styled from "styled-components";
 // Components
 import ProjectHeader from "@/components/app/base/ProjectHeader";
 import ProjectFooter from "@/components/app/base/ProjectFooter";
+import { StyledLoader, StyledLoaderWrapper } from "@/components/styledComponents/StyledElements";
 import { createGlobalStyle } from "styled-components";
 
 const TemplateStyle = createGlobalStyle`
@@ -19,12 +20,18 @@ const StyledMain = styled.main`
 
 class ProjectLayout extends Component {
   render() {
+    const { loading } = this.props;
     return (
       <>
         <TemplateStyle />
         <ProjectHeader {...this.props} />
-        <StyledMain>{this.props.children}</StyledMain>
+        {!loading && <StyledMain>{this.props.children}</StyledMain>}
         <ProjectFooter {...this.props} />
+        {loading && (
+          <StyledLoaderWrapper Fixed WhiteLess>
+            <StyledLoader />
+          </StyledLoaderWrapper>
+        )}
       </>
     );
   }

@@ -5,13 +5,17 @@ import { StyledAppFooter } from "@/components/styledComponents/StyledBase";
 import { StyledButton } from "@/components/styledComponents/StyledElements";
 
 const WizardFooter = (props) => {
-  const { nextDestination, nextButtonText, nextButtonState, currentStep } = props;
+  const { nextDestination, nextButtonText, nextButtonState, currentStep, handleSubmit } = props;
   return (
     <>
       <StyledAppFooter>
         <Container className="text-center">
           {currentStep === "step__three" ? (
-            <StyledButton state={nextButtonState} className={nextButtonState}>
+            <StyledButton
+              onClick={handleSubmit}
+              state={nextButtonState}
+              className={nextButtonState}
+            >
               {nextButtonText}
             </StyledButton>
           ) : (

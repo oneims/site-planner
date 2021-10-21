@@ -36,7 +36,7 @@ const EditorAside = (props) => {
                 </StyledPrivateButton>
               </StyledContentBox>
             </StyledPannel>
-            <StyledPannel className="theme__viewport-padding theme__height-100 my-3 mx-2 theme__solids-bg-white pt-4 pb-4 theme__border theme__border-radius-10 theme__height-62vh theme__overflow-y">
+            <StyledPannel className="theme__position-relative theme__viewport-padding theme__height-100 my-3 mx-2 theme__solids-bg-white pt-4 pb-4 theme__border theme__border-radius-10 theme__height-62vh theme__overflow-y">
               <StyledContentBox
                 style={{ transition: "0.2s ease" }}
                 className={props.editorExpanded && `ml-auto mr-auto mw-800 tree-parent`}

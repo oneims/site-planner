@@ -10,7 +10,15 @@ import {
 import { StyledButton, StyledLinkButton } from "@/components/styledComponents/StyledElements";
 
 const WizardHeader = (props) => {
-  const { currentStep, nextButtonText, backDestination, nextButtonState, nextDestination } = props;
+  const {
+    currentStep,
+    nextButtonText,
+    backDestination,
+    nextButtonState,
+    nextDestination,
+    handleSubmit,
+  } = props;
+
   return (
     <>
       <StyledHeader className={`step ${currentStep}`}>
@@ -30,11 +38,17 @@ const WizardHeader = (props) => {
               </Link>
             </StyledHeaderColumn>
             <StyledHeaderColumn>
-              <Link href={nextDestination}>
-                <StyledButton state={nextButtonState} themeStyle="primary">
+              {currentStep === "step__three" ? (
+                <StyledButton onClick={handleSubmit} state={nextButtonState} themeStyle="primary">
                   {nextButtonText}
                 </StyledButton>
-              </Link>
+              ) : (
+                <Link href={nextDestination}>
+                  <StyledButton state={nextButtonState} themeStyle="primary">
+                    {nextButtonText}
+                  </StyledButton>
+                </Link>
+              )}
             </StyledHeaderColumn>
           </StyledHeaderWrapper>
         </Container>

@@ -1,108 +1,153 @@
-import React, { Component } from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import ProjectLayout from "/components/app/base/ProjectLayout";
+import { useRouter } from "next/router";
 
-class ProjectProvider extends Component {
-  state = {
-    treeData: [
-      {
-        name: "Solutions Page",
-        expanded: true,
-        children: [{ name: "Solutions Page One" }, { name: "Solutions Page Two" }],
-      },
-      {
-        name: "About Page",
-        expanded: true,
-        children: [{ name: "Our History" }, { name: "Meet The Team" }],
-      },
-      { name: "FAQ Page" },
-      { name: "Resources Page" },
-      { name: "Blog Page" },
-      { name: "Contact Page" },
-    ],
+const ProjectProvider = (props) => {
+  const { Component, pageProps } = props;
+  const [data, setData] = useState({
+    treeData: [],
     addAsFirstChild: false,
     primaryColor: {
-      r: "234",
-      g: "240",
-      b: "246",
-      a: "1",
+      r: "",
+      g: "",
+      b: "",
+      a: "",
     },
     borderColor: {
-      r: "203",
-      g: "214",
-      b: "226",
-      a: "1",
+      r: "",
+      g: "",
+      b: "",
+      a: "",
     },
     textColor: {
-      r: "80",
-      g: "110",
-      b: "145",
-      a: "1",
+      r: "",
+      g: "",
+      b: "",
+      a: "",
     },
+  });
+  const [misc, setMisc] = useState({
     displayPrimaryColorPicker: false,
     displayBorderColorPicker: false,
     displayTextColorPicker: false,
     activeColorPicker: null,
+    loading: true,
+  });
+  const router = useRouter();
+
+  const fetchData = async () => {
+    const { sitemapParams } = router.query;
+    if (!sitemapParams) {
+      return null;
+    }
+    // const projectUID = sitemapParams[0];
+    const sitemapUID = sitemapParams[sitemapParams.length - 1];
+    await axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/sitemaps?UID=${sitemapUID}`)
+      .then((res) => {
+        const menu_schema = res.data[0].menu_schema;
+        const primary_color = res.data[0].primary_color;
+        const text_color = res.data[0].text_color;
+        const border_color = res.data[0].border_color;
+        const title = res.data[0].title;
+        // setData({
+        //   ...data,
+        //   sit
+        // })
+        setData({
+          ...data,
+          treeData: menu_schema,
+          primaryColor: primary_color,
+          textColor: text_color,
+          borderColor: border_color,
+          title,
+        });
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setMisc({
+          ...misc,
+          loading: false,
+        });
+      });
   };
 
-  handleTree = {
+  useEffect(() => {
+    fetchData();
+  }, [router.isReady]);
+
+  const handleTree = {
     positionChange: (treeData) => {
-      this.setState({
+      setData({
+        ...data,
         treeData,
       });
     },
     inputChange: (event, node, path, getNodeKey, changeNodeAtPath) => {
       const name = event.target.value;
-      this.setState((state) => ({
+      setData({
+        ...data,
         treeData: changeNodeAtPath({
-          treeData: state.treeData,
+          treeData: data.treeData,
           path,
           getNodeKey,
           newNode: { ...node, name },
         }),
-      }));
+      });
     },
     addChildItem: (path, itemName, getNodeKey, addNodeUnderParent) => {
-      this.setState((state) => ({
+      setData({
+        ...data,
         treeData: addNodeUnderParent({
-          treeData: state.treeData,
+          treeData: data.treeData,
           parentKey: path[path.length - 1],
           expandParent: true,
           getNodeKey,
           newNode: {
             name: itemName,
           },
-          addAsFirstChild: state.addAsFirstChild,
+          addAsFirstChild: data.addAsFirstChild,
         }).treeData,
-      }));
+      });
     },
     addItem: (itemName) => {
-      this.setState((state) => ({
-        treeData: state.treeData.concat({
+      setData({
+        ...data,
+        treeData: data.treeData.concat({
           name: itemName,
         }),
-      }));
+      });
     },
     removeItem: (path, getNodeKey, removeNodeAtPath) => {
-      this.setState((state) => ({
+      setData({
+        ...data,
         treeData: removeNodeAtPath({
-          treeData: state.treeData,
+          treeData: data.treeData,
           path,
           getNodeKey,
         }),
-      }));
+      });
     },
   };
 
-  handleColorPicker = {
+  const handleColorPicker = {
     show: (event) => {
       const target = event.target.getAttribute("data-target");
       const handler = event.target.getAttribute("data-handler");
-      console.log(target);
-      this.setState({ [target]: !this.state[target], activeColorPicker: handler });
+      setMisc({
+        ...misc,
+        [target]: !misc[target],
+        activeColorPicker: handler,
+      });
     },
     close: (event) => {
       const target = event.target.getAttribute("data-target");
-      this.setState({
+      setMisc({
+        ...misc,
         displayPrimaryColorPicker: false,
         displayBorderColorPicker: false,
         displayTextColorPicker: false,
@@ -110,24 +155,24 @@ class ProjectProvider extends Component {
       });
     },
     change: (color) => {
-      const active = this.state.activeColorPicker;
-      this.setState({ [active]: color.rgb });
+      const active = misc.activeColorPicker;
+      setMisc({
+        ...misc,
+        [active]: color.rgb,
+      });
     },
   };
-
-  render() {
-    const { Component, pageProps } = this.props;
-    return (
-      <ProjectLayout>
-        <Component
-          handleTree={this.handleTree}
-          handleColorPicker={this.handleColorPicker}
-          {...this.state}
-          {...pageProps}
-        />
-      </ProjectLayout>
-    );
-  }
-}
+  return (
+    <ProjectLayout loading={misc.loading}>
+      <Component
+        handleTree={handleTree}
+        handleColorPicker={handleColorPicker}
+        {...data}
+        {...misc}
+        {...pageProps}
+      />
+    </ProjectLayout>
+  );
+};
 
 export default ProjectProvider;
