@@ -41,6 +41,7 @@ const SitemapCanvas = ({
   primaryColor,
   borderColor,
   textColor,
+  title,
 }) => {
   const buttonStyles = {
     backgroundColor: `rgba(${primaryColor.r}, ${primaryColor.g}, ${primaryColor.b}, ${primaryColor.a})`,
@@ -50,7 +51,9 @@ const SitemapCanvas = ({
 
   return (
     <>
-      <StyledContentBox className={!shareMode && `theme__min-height-2000 theme__min-width-2000`}>
+      <StyledContentBox
+        className={!shareMode ? `theme__min-height-2000 theme__min-width-2000` : `ml-auto mr-auto`}
+      >
         <StyledSitemap
           style={{
             transform: `translateX(${canvasZoom.translateX}px) translateY(${canvasZoom.translateY}px) scale(${canvasZoom.scale})`,
@@ -62,7 +65,7 @@ const SitemapCanvas = ({
               <li className="tree-leaf root">
                 <div className="tree-node">
                   <div style={buttonStyles} className="page page-root">
-                    Header Sitemap
+                    {title && title}
                   </div>
                 </div>
                 <ul className="tree-children">{MenuGenerator(treeData, buttonStyles)}</ul>

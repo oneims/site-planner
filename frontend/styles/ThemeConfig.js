@@ -135,6 +135,36 @@ export const GlobalStyle = createGlobalStyle`
 
 // ******* THEME ******
 
+.visually-hidden {
+  clip: rect(0 0 0 0); 
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap; 
+  width: 1px;
+}
+
+.spinner {
+  width: 1rem; 
+  height: 1rem; 
+  border-width: 0.2em; 
+  margin-left: 0.4rem;
+}
+
+.currently-saving {
+  pointer-events: none;
+  background-color: ${theme.colors.appButtonText};
+  border: none;
+  color: #fff;
+}
+
+.in-canvas-button {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+}
+
 body,
 html {
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial,

@@ -180,6 +180,7 @@ class ProjectWizardProvider extends Component {
         b: "145",
         a: "1",
       },
+      project_name,
     };
     axios
       .all([

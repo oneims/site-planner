@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { ChromePicker } from "react-color";
+import Spinner from "react-bootstrap/Spinner";
+import useOutsideClick from "@/lib/Hooks";
 import {
   StyledContentBox,
   StyledPannel,
@@ -10,7 +12,12 @@ import {
   StyledAppHeadingLabel,
   StyledAppContentTypography,
 } from "@/components/styledComponents/StyledTypography";
-import { StyledPrivateButton } from "@/components/styledComponents/StyledElements";
+import {
+  StyledPrivateButton,
+  StyledInput,
+  StyledLoader,
+  StyledLoaderWrapper,
+} from "@/components/styledComponents/StyledElements";
 import SitemapCanvas from "@/components/app/views/SitemapCanvas";
 
 const EditorViewport = (props) => {
@@ -18,6 +25,12 @@ const EditorViewport = (props) => {
     scale: 1,
     translateX: 0,
     translateY: 0,
+  });
+
+  const ref = useRef();
+
+  useOutsideClick(ref, () => {
+    props.saveTitle();
   });
 
   const zoomIn = () => {
@@ -76,6 +89,13 @@ const EditorViewport = (props) => {
     displayTextColorPicker,
     handleColorPicker,
     title,
+    project_name,
+    editingTitle,
+    handleTitleEditor,
+    saving,
+    handleSave,
+    fetchData,
+    iframeLoading,
   } = props;
 
   return (
@@ -90,11 +110,11 @@ const EditorViewport = (props) => {
               <StyledContentBox className="d-flex align-items-end justify-content-between">
                 <StyledContentBox>
                   <StyledAppHeadingLabel className="mb-2 d-flex" style={{ lineHeight: "1" }}>
-                    Company Name
+                    {project_name && project_name}
                   </StyledAppHeadingLabel>
-                  <StyledAppContentTypography>Header Sitemap</StyledAppContentTypography>
+                  <StyledAppContentTypography>{title && title}</StyledAppContentTypography>
                 </StyledContentBox>
-                <StyledContentBox>
+                <StyledContentBox className="d-flex flex-column justify-content-between">
                   <StyledAppContentTypography>
                     Powered by{" "}
                     <a href="/" target="_blank" rel="noopener noreferrer">
@@ -104,7 +124,15 @@ const EditorViewport = (props) => {
                 </StyledContentBox>
               </StyledContentBox>
             </StyledPannel>
-            <StyledContentBox className="pl-4 pr-4 pt-5 theme__height-100 d-flex justify-content-center theme__overflow-y theme__overflow-x theme__canvas-background">
+            <StyledContentBox className="pl-4 pr-4 pt-5 theme__height-100 d-flex theme__overflow-y theme__overflow-x theme__canvas-background">
+              <StyledPrivateButton className="in-canvas-button" onClick={() => fetchData(true)}>
+                Refresh Preview
+              </StyledPrivateButton>
+              {iframeLoading && (
+                <StyledLoaderWrapper Absolute WhiteLess>
+                  <StyledLoader />
+                </StyledLoaderWrapper>
+              )}
               <SitemapCanvas canvasZoom={canvasZoom} {...props} />
             </StyledContentBox>
           </StyledViewPort>
@@ -119,12 +147,38 @@ const EditorViewport = (props) => {
               <StyledContentBox className="d-flex align-items-center justify-content-between">
                 <StyledContentBox>
                   <StyledAppHeadingLabel className="mb-2 d-flex" style={{ lineHeight: "1" }}>
-                    Company Name
+                    {project_name && project_name}
                   </StyledAppHeadingLabel>
-                  <StyledAppContentTypography>{title}</StyledAppContentTypography>
+                  {editingTitle ? (
+                    <StyledInput
+                      themeStyle="inline"
+                      name="title"
+                      value={title}
+                      onChange={handleTitleEditor}
+                      placeholder="Untitled Sitemap"
+                      ref={ref}
+                    />
+                  ) : (
+                    <StyledAppContentTypography
+                      style={{ cursor: "pointer" }}
+                      onClick={handleTitleEditor}
+                    >
+                      {title}
+                    </StyledAppContentTypography>
+                  )}
                 </StyledContentBox>
                 <StyledContentBox>
-                  <StyledPrivateButton className="mr-2">Save</StyledPrivateButton>
+                  <StyledPrivateButton
+                    onClick={handleSave}
+                    className={`mr-2 ${saving && `currently-saving`}`}
+                  >
+                    {saving ? `Saving...` : `Save`}
+                    {saving && (
+                      <Spinner className="spinner" animation="border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                      </Spinner>
+                    )}
+                  </StyledPrivateButton>
                   <a href={shareURL} target="_blank" rel="noopener noreferrer">
                     <StyledPrivateButton>Preview</StyledPrivateButton>
                   </a>
@@ -140,7 +194,7 @@ const EditorViewport = (props) => {
                   <StyledPrivateButton className="mr-1" onClick={() => zoomOut()}>
                     -
                   </StyledPrivateButton>
-                  <StyledPrivateButton onClick={() => resetZoom()}>Reset</StyledPrivateButton>
+                  <StyledPrivateButton onClick={() => resetZoom()}>Reset Zoom</StyledPrivateButton>
                 </div>
                 <div className="tools d-flex">
                   <div className="theme__position-relative mr-1">

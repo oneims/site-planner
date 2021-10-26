@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 // Components
-import ShareHeader from "@/components/app/base/ShareHeader";
-import ShareFooter from "@/components/app/base/ShareFooter";
+import { StyledLoader, StyledLoaderWrapper } from "@/components/styledComponents/StyledElements";
 import { createGlobalStyle } from "styled-components";
 
 const TemplateStyle = createGlobalStyle`
@@ -19,10 +18,16 @@ const StyledMain = styled.main`
 
 class ShareLayout extends Component {
   render() {
+    const { loading } = this.props;
     return (
       <>
         <TemplateStyle />
-        <StyledMain>{this.props.children}</StyledMain>
+        {!loading && <StyledMain>{this.props.children}</StyledMain>}
+        {loading && (
+          <StyledLoaderWrapper Fixed WhiteLess>
+            <StyledLoader />
+          </StyledLoaderWrapper>
+        )}
       </>
     );
   }

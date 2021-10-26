@@ -29,6 +29,9 @@
     },
     "text_color": {
       "type": "json"
+    },
+    "project_name": {
+      "type": "string"
     }
   }
 }

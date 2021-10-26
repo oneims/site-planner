@@ -1,5 +1,4 @@
 import React from "react";
-import { useRouter } from "next/router";
 import { Container, Row, Col } from "react-bootstrap";
 import {
   StyledContentBox,
@@ -12,15 +11,8 @@ import {
 import { StyledAppHeadingLabel, StyledTag } from "@/components/styledComponents/StyledTypography";
 import SitemapCard from "@/components/app/views/SitemapCard";
 
-const ProjectOverview = () => {
-  const router = useRouter();
-  const { id } = router.query;
-
-  if (!id) {
-    return null;
-  }
-  const projectID = id;
-
+const ProjectOverview = ({ projectName, projectUID, sitemaps }) => {
+  console.log(projectName);
   return (
     <>
       <StyledAppWrapper>
@@ -31,7 +23,7 @@ const ProjectOverview = () => {
                 <StyledPannel className="theme__viewport-padding theme__solids-bg-white pt-2 pb-2 theme__border-bottom theme__position-sticky theme__top-0 theme__z-index-1">
                   <StyledContentBox className="pt-2 pb-2">
                     <StyledAppHeadingLabel className="mb-0" style={{ lineHeight: "1" }}>
-                      Project Overview (Organization name will come here)
+                      {projectName && projectName}
                     </StyledAppHeadingLabel>
                   </StyledContentBox>
                 </StyledPannel>
@@ -40,11 +32,17 @@ const ProjectOverview = () => {
                     <StyledTag themeStyle="uppercase">Sitemaps</StyledTag>
                   </StyledContentBox>
                   <Row>
+                    {sitemaps.map((elem) => (
+                      <Col lg="3" className="mb-4">
+                        <SitemapCard
+                          key={elem.id}
+                          title={elem.title}
+                          destination={`/project/${projectUID}/sitemap/${elem.UID}`}
+                        />
+                      </Col>
+                    ))}
                     <Col lg="3" className="mb-4">
-                      <SitemapCard title="Header Sitemap" />
-                    </Col>
-                    <Col lg="3" className="mb-4">
-                      <SitemapCard title="Footer Sitemap" />
+                      <SitemapCard key="Add New" title="Create a New Sitemap" addNew />
                     </Col>
                   </Row>
                 </StyledContentBox>

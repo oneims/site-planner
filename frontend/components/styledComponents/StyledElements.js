@@ -153,6 +153,14 @@ export const StyledInput = styled.input`
       0 0 0 1px ${(props) => props.theme.colors.primary};
     outline: 0;
   }
+  ${(props) =>
+    props.themeStyle === "inline"
+      ? css`
+          font-weight: 500;
+          padding: 5px 10px;
+          font-size: 14px;
+        `
+      : ``};
 `;
 
 // Theme Card

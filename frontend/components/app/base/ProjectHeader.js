@@ -30,7 +30,7 @@ const ProjectHeader = () => {
                 </StyledLogoWrapper>
               </Link>
               {isEditor && (
-                <Link href="/project/ajo0s08zkl">
+                <Link href={`/project/${isEditor[0]}`}>
                   <StyledButton
                     className="ml-3"
                     themeStyle="primary"
