@@ -170,7 +170,7 @@ const EditorViewport = (props) => {
                 <StyledContentBox>
                   <StyledPrivateButton
                     onClick={handleSave}
-                    className={`mr-2 ${saving && `currently-saving`}`}
+                    className={`mr-2 ${saving ? `currently-saving` : ``}`}
                   >
                     {saving ? `Saving...` : `Save`}
                     {saving && (

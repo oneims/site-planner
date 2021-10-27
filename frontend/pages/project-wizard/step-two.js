@@ -21,6 +21,7 @@ const industries = [
       { value: "transport", label: "Transport" },
       { value: "construction", label: "Construction" },
       { value: "health_care", label: "Health Care" },
+      { value: "other", label: "Other" },
     ],
   },
 ];

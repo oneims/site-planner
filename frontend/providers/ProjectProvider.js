@@ -1,8 +1,10 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Router from "next/router";
 import ProjectLayout from "/components/app/base/ProjectLayout";
-import { sleeper } from "/lib/Helpers";
+import { generateUID, sleeper } from "/lib/Helpers";
 import { useRouter } from "next/router";
+import { Schema__001 } from "/lib/SitemapSchema";
 
 const ProjectProvider = (props) => {
   const { Component, pageProps } = props;
@@ -28,7 +30,14 @@ const ProjectProvider = (props) => {
       a: "",
     },
   });
-  const [projectData, setProjectData] = useState({});
+  const [project, setProject] = useState({
+    projectName: null,
+    projectDBID: null,
+    number_of_pages: null,
+    PROJECT_UID: null,
+    industry: null,
+    sitemaps: null,
+  });
   const [misc, setMisc] = useState({
     displayPrimaryColorPicker: false,
     displayBorderColorPicker: false,
@@ -38,6 +47,7 @@ const ProjectProvider = (props) => {
     editingTitle: false,
   });
   const [saving, setSaving] = useState(false);
+  const [projectDataReady, setProjectDataReady] = useState(false);
   const router = useRouter();
 
   const fetchSitemapData = async () => {
@@ -45,10 +55,14 @@ const ProjectProvider = (props) => {
     if (!sitemapParams) {
       return null;
     }
-    // const projectUID = sitemapParams[0];
+    setMisc({
+      ...misc,
+      loading: true,
+    });
     const sitemapUID = sitemapParams[sitemapParams.length - 1];
     await axios
       .get(`${process.env.NEXT_PUBLIC_API_URL}/sitemaps?UID=${sitemapUID}`)
+      .then(sleeper(500))
       .then((res) => {
         const menu_schema = res.data[0].menu_schema;
         const primary_color = res.data[0].primary_color;
@@ -57,7 +71,7 @@ const ProjectProvider = (props) => {
         const title = res.data[0].title;
         const project_name = res.data[0].project_name;
         const sitemapDBID = res.data[0].id;
-        const sitemapUID = res.data[0].uid;
+        const sitemapUID = res.data[0].UID;
         setData({
           ...data,
           treeData: menu_schema,
@@ -69,7 +83,7 @@ const ProjectProvider = (props) => {
           sitemapDBID,
           sitemapUID,
         });
-        console.log(res);
+        console.log("Sitemap Data: ", res);
       })
       .catch((err) => {
         console.log(err);
@@ -79,6 +93,7 @@ const ProjectProvider = (props) => {
           ...misc,
           loading: false,
         });
+        setProjectDataReady(false);
       });
   };
 
@@ -87,23 +102,31 @@ const ProjectProvider = (props) => {
     if (!id) {
       return null;
     }
+    setProjectDataReady(false);
+    setMisc({
+      ...misc,
+      loading: true,
+    });
     await axios
       .get(`${process.env.NEXT_PUBLIC_API_URL}/projects?UID=${id}`)
+      .then(sleeper(500))
       .then((res) => {
         const project_name = res.data[0].name;
         const projectDBID = res.data[0].id;
-        const projectUID = res.data[0].UID;
+        const PROJECT_UID = res.data[0].UID;
         const industry = res.data[0].industry;
-        const sitemaps = res.data[0].sitemaps;
-        setProjectData({
-          ...projectData,
+        const sitemaps = res.data[0].sitemaps.sort((a, b) => b.id - a.id);
+        const number_of_pages = res.data[0].number_of_pages;
+        setProject({
+          ...project,
           projectName: project_name,
           projectDBID,
-          projectUID,
+          number_of_pages,
+          PROJECT_UID,
           industry,
           sitemaps,
         });
-        console.log(res);
+        console.log("Project Data: ", res);
       })
       .catch((err) => {
         console.log(err);
@@ -113,6 +136,7 @@ const ProjectProvider = (props) => {
           ...misc,
           loading: false,
         });
+        setProjectDataReady(true);
       });
   };
 
@@ -263,16 +287,86 @@ const ProjectProvider = (props) => {
     updateData();
   };
 
+  const addNewSitemap = () => {
+    const { projectName, projectDBID, PROJECT_UID, sitemaps } = project;
+    const sitemapsArr = sitemaps.map((elem) => elem.id);
+    const SITEMAP_UID = generateUID(process.env.NEXT_PUBLIC_UID_THRESHOLD);
+    const NEW_URL = `/project/${PROJECT_UID}/sitemap/${SITEMAP_UID}`;
+    setMisc({
+      ...misc,
+      loading: true,
+    });
+    const sitemapData = {
+      UID: SITEMAP_UID,
+      title: "Untitled Sitemap",
+      menu_schema: Schema__001,
+      primary_color: {
+        r: "234",
+        g: "240",
+        b: "246",
+        a: "1",
+      },
+      border_color: {
+        r: "203",
+        g: "214",
+        b: "226",
+        a: "1",
+      },
+      text_color: {
+        r: "80",
+        g: "110",
+        b: "145",
+        a: "1",
+      },
+      project_name: projectName,
+    };
+    axios;
+    axios
+      .post(`${process.env.NEXT_PUBLIC_API_URL}/sitemaps`, sitemapData)
+      .then(sleeper(900))
+      .then((res) => {
+        console.log(res);
+        const sitemapDBID = res.data.id;
+        sitemapsArr.push(sitemapDBID);
+        axios
+          .put(`${process.env.NEXT_PUBLIC_API_URL}/projects/${projectDBID}`, {
+            sitemaps: sitemapsArr,
+          })
+          .then((res) => {
+            console.log(res);
+            Router.push(NEW_URL);
+            setMisc({
+              ...misc,
+              loading: false,
+            });
+          })
+          .catch((err) => {
+            alert("Oops, something went wrong! Please try again later.");
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        setMisc({
+          ...misc,
+          loading: false,
+        });
+        alert("Oops, something went wrong! Please try again later.");
+        console.log(err);
+      });
+  };
+
   return (
     <ProjectLayout loading={misc.loading}>
       <Component
         handleTitleEditor={handleTitleEditor}
         saveTitle={saveTitle}
         handleSave={handleSave}
+        addNewSitemap={addNewSitemap}
         handleTree={handleTree}
         handleColorPicker={handleColorPicker}
         saving={saving}
-        {...projectData}
+        projectDataReady={projectDataReady}
+        {...project}
         {...data}
         {...misc}
         {...pageProps}

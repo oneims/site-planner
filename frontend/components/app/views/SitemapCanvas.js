@@ -51,29 +51,33 @@ const SitemapCanvas = ({
 
   return (
     <>
-      <StyledContentBox
-        className={!shareMode ? `theme__min-height-2000 theme__min-width-2000` : `ml-auto mr-auto`}
-      >
-        <StyledSitemap
-          style={{
-            transform: `translateX(${canvasZoom.translateX}px) translateY(${canvasZoom.translateY}px) scale(${canvasZoom.scale})`,
-            transition: `0.2s ease`,
-          }}
+      {treeData && (
+        <StyledContentBox
+          className={
+            !shareMode ? `theme__min-height-2000 theme__min-width-2000` : `ml-auto mr-auto`
+          }
         >
-          <div className="tree-con mix-view">
-            <ul className="tree-children root">
-              <li className="tree-leaf root">
-                <div className="tree-node">
-                  <div style={buttonStyles} className="page page-root">
-                    {title && title}
+          <StyledSitemap
+            style={{
+              transform: `translateX(${canvasZoom.translateX}px) translateY(${canvasZoom.translateY}px) scale(${canvasZoom.scale})`,
+              transition: `0.2s ease`,
+            }}
+          >
+            <div className="tree-con mix-view">
+              <ul className="tree-children root">
+                <li className="tree-leaf root">
+                  <div className="tree-node">
+                    <div style={buttonStyles} className="page page-root">
+                      {title && title}
+                    </div>
                   </div>
-                </div>
-                <ul className="tree-children">{MenuGenerator(treeData, buttonStyles)}</ul>
-              </li>
-            </ul>
-          </div>
-        </StyledSitemap>
-      </StyledContentBox>
+                  <ul className="tree-children">{MenuGenerator(treeData, buttonStyles)}</ul>
+                </li>
+              </ul>
+            </div>
+          </StyledSitemap>
+        </StyledContentBox>
+      )}
     </>
   );
 };

@@ -154,9 +154,9 @@ export const GlobalStyle = createGlobalStyle`
 
 .currently-saving {
   pointer-events: none;
-  background-color: ${theme.colors.appButtonText};
+  background-color: ${theme.colors.appButtonText} !important;
   border: none;
-  color: #fff;
+  color: #fff !important;
 }
 
 .in-canvas-button {
