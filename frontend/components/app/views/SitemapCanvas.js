@@ -2,7 +2,7 @@ import React from "react";
 import { StyledContentBox } from "@/components/styledComponents/StyledWrappers";
 import { StyledSitemap } from "@/components/styledComponents/StyledElements";
 
-const MenuGenerator = (items, buttonStyles) => {
+const MenuGenerator = (items, buttonStyles, handleTree) => {
   items = Array.from(items);
   return items.map((item, index) => {
     return (
@@ -17,6 +17,9 @@ const MenuGenerator = (items, buttonStyles) => {
             <div className="drop-box"></div>
           </div>
           <div
+            onClick={() =>
+              handleTree.updateNodeColor(item.nodeId) && handleTree.updateNodeColor(item.nodeId)
+            }
             style={buttonStyles}
             className={`page ${item.children && item.children.length > 0 ? "" : "nochilds"}`}
           >
@@ -27,7 +30,9 @@ const MenuGenerator = (items, buttonStyles) => {
           </div>
         </div>
         {item.children && item.children.length > 0 ? (
-          <ul className="tree-children">{MenuGenerator(item.children, buttonStyles)}</ul>
+          <ul className="tree-children">
+            {MenuGenerator(item.children, buttonStyles, handleTree)}
+          </ul>
         ) : null}
       </li>
     );
@@ -36,6 +41,7 @@ const MenuGenerator = (items, buttonStyles) => {
 
 const SitemapCanvas = ({
   shareMode,
+  handleTree,
   treeData,
   canvasZoom,
   primaryColor,
@@ -71,7 +77,9 @@ const SitemapCanvas = ({
                       {title && title}
                     </div>
                   </div>
-                  <ul className="tree-children">{MenuGenerator(treeData, buttonStyles)}</ul>
+                  <ul className="tree-children">
+                    {MenuGenerator(treeData, buttonStyles, handleTree)}
+                  </ul>
                 </li>
               </ul>
             </div>

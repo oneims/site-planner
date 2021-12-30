@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Router from "next/router";
 import ProjectLayout from "/components/app/base/ProjectLayout";
-import { generateUID, sleeper } from "/lib/Helpers";
+import { generateUID, sleeper, findNodeByNodeId } from "/lib/Helpers";
 import { useRouter } from "next/router";
 import { Schema__001 } from "/lib/SitemapSchema";
+import { changeNodeAtPath } from "react-sortable-tree";
 
 const ProjectProvider = (props) => {
   const { Component, pageProps } = props;
@@ -191,6 +192,37 @@ const ProjectProvider = (props) => {
         }),
       });
     },
+    updateNodeColor: (nodeId) => {
+      let updatedTreeData;
+      let itemToUpdate;
+      if (nodeId) {
+        console.log(nodeId);
+        updatedTreeData = [...data.treeData];
+        itemToUpdate = findNodeByNodeId(updatedTreeData, nodeId);
+        itemToUpdate.name = "New Name";
+        setData({
+          ...data,
+          treeData: [...updatedTreeData],
+        });
+      }
+      // const item
+      // itemToUpdate = { ...updatedTreeData[index] };
+      // itemToUpdate.name = "New Name";
+      // updatedTreeData[index] = itemToUpdate;
+      // if (updatedTreeData[parentIndex].children) {
+      //   // itemToUpdate = { ...updatedTreeData[parentIndex].children[index] };
+      //   // itemToUpdate.name = "New Name";
+      //   // updatedTreeData[parentIndex].children[parentIndex] = itemToUpdate;
+      // } else {
+      //   itemToUpdate = { ...updatedTreeData[index] };
+      //   itemToUpdate.name = "New Name";
+      //   updatedTreeData[index] = itemToUpdate;
+      // }
+      // setData({
+      //   ...data,
+      //   treeData: [...updatedTreeData],
+      // });
+    },
     addChildItem: (path, itemName, getNodeKey, addNodeUnderParent) => {
       setData({
         ...data,
@@ -201,6 +233,7 @@ const ProjectProvider = (props) => {
           getNodeKey,
           newNode: {
             name: itemName,
+            nodeId: generateUID(process.env.NEXT_PUBLIC_UID_THRESHOLD),
           },
           addAsFirstChild: data.addAsFirstChild,
         }).treeData,
@@ -211,6 +244,7 @@ const ProjectProvider = (props) => {
         ...data,
         treeData: data.treeData.concat({
           name: itemName,
+          nodeId: generateUID(process.env.NEXT_PUBLIC_UID_THRESHOLD),
         }),
       });
     },

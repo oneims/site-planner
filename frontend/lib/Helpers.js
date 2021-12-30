@@ -24,3 +24,21 @@ export function sleeper(ms) {
     return new Promise((resolve) => setTimeout(() => resolve(x), ms));
   };
 }
+
+export function findNodeByNodeId(nodes, id) {
+  let res;
+  function findNode(nodes, id) {
+    for (let i = 0; i < nodes.length; i++) {
+      if (nodes[i].nodeId === id) {
+        res = nodes[i];
+        break;
+      }
+      if (nodes[i].children) {
+        findNode(nodes[i].children, id);
+      }
+    }
+  }
+  findNode(nodes, id);
+
+  return res;
+}
