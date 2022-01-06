@@ -33,17 +33,18 @@ const ProjectOverview = ({
                       </StyledAppHeadingLabel>
                     </StyledContentBox>
                   </StyledPannel>
-                  <StyledContentBox className="pl-4 pr-4 pt-4 mt-2 theme__viewport-padding theme__height-100 theme__overflow-y theme__overflow-x theme__canvas-background">
+                  <StyledContentBox className="pl-4 pr-4 pt-4 mt-2 theme__viewport-padding theme__height-100 theme__canvas-background">
                     <StyledContentBox className="mb-3">
                       <StyledTag themeStyle="uppercase">Sitemaps</StyledTag>
                     </StyledContentBox>
                     <Row>
                       {sitemaps.map((elem, index) => (
-                        <Col lg="3" className="mb-4">
+                        <Col lg="3" key={elem.id} className="mb-4">
                           <SitemapCard
                             key={index}
                             title={elem.title}
                             destination={`/project/${PROJECT_UID}/sitemap/${elem.UID}`}
+                            cloneHandler={() => addNewSitemap(elem.id)}
                           />
                         </Col>
                       ))}

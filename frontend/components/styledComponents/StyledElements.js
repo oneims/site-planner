@@ -167,7 +167,7 @@ export const StyledInput = styled.input`
 export const StyledSitemapCard = styled.div`
   background-color: ${theme.colors.white};
   border: 2px solid ${theme.colors.borderColor};
-  cursor: pointer;
+  // cursor: pointer;
   display: flex;
   flex-direction: column;
   height: 100%;

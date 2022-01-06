@@ -193,18 +193,21 @@ const ProjectProvider = (props) => {
       });
     },
     updateNodeColor: (nodeId) => {
-      let updatedTreeData;
-      let itemToUpdate;
-      if (nodeId) {
-        console.log(nodeId);
-        updatedTreeData = [...data.treeData];
-        itemToUpdate = findNodeByNodeId(updatedTreeData, nodeId);
-        itemToUpdate.name = "New Name";
-        setData({
-          ...data,
-          treeData: [...updatedTreeData],
-        });
-      }
+      console.log(nodeId ? `${nodeId} clicked` : `Node without an ID clicked`);
+      // ******** Below snippet helps update the color of a singular node
+      // let updatedTreeData;
+      // let itemToUpdate;
+      // if (nodeId) {
+      //   console.log(nodeId);
+      //   updatedTreeData = [...data.treeData];
+      //   itemToUpdate = findNodeByNodeId(updatedTreeData, nodeId);
+      //   itemToUpdate.name = "New Name";
+      //   setData({
+      //     ...data,
+      //     treeData: [...updatedTreeData],
+      //   });
+      // }
+      // ******** Above snippet helps update the color of a singular node
       // const item
       // itemToUpdate = { ...updatedTreeData[index] };
       // itemToUpdate.name = "New Name";
@@ -321,7 +324,7 @@ const ProjectProvider = (props) => {
     updateData();
   };
 
-  const addNewSitemap = () => {
+  const addNewSitemap = (sitemapIdToClone) => {
     const { projectName, projectDBID, PROJECT_UID, sitemaps } = project;
     const sitemapsArr = sitemaps.map((elem) => elem.id);
     const SITEMAP_UID = generateUID(process.env.NEXT_PUBLIC_UID_THRESHOLD);
@@ -330,30 +333,44 @@ const ProjectProvider = (props) => {
       ...misc,
       loading: true,
     });
-    const sitemapData = {
-      UID: SITEMAP_UID,
-      title: "Untitled Sitemap",
-      menu_schema: Schema__001,
-      primary_color: {
-        r: "234",
-        g: "240",
-        b: "246",
-        a: "1",
-      },
-      border_color: {
-        r: "203",
-        g: "214",
-        b: "226",
-        a: "1",
-      },
-      text_color: {
-        r: "80",
-        g: "110",
-        b: "145",
-        a: "1",
-      },
-      project_name: projectName,
-    };
+    let sitemapData;
+    if (sitemapIdToClone) {
+      const sitemapToClone = sitemaps.filter((elem) => elem.id === sitemapIdToClone)[0];
+      sitemapData = {
+        UID: SITEMAP_UID,
+        title: `${sitemapToClone.title} (Clone)`,
+        menu_schema: sitemapToClone.menu_schema,
+        primary_color: sitemapToClone.primary_color,
+        border_color: sitemapToClone.border_color,
+        text_color: sitemapToClone.text_color,
+        project_name: projectName,
+      };
+    } else {
+      sitemapData = {
+        UID: SITEMAP_UID,
+        title: "Untitled Sitemap",
+        menu_schema: Schema__001,
+        primary_color: {
+          r: "234",
+          g: "240",
+          b: "246",
+          a: "1",
+        },
+        border_color: {
+          r: "203",
+          g: "214",
+          b: "226",
+          a: "1",
+        },
+        text_color: {
+          r: "80",
+          g: "110",
+          b: "145",
+          a: "1",
+        },
+        project_name: projectName,
+      };
+    }
     axios;
     axios
       .post(`${process.env.NEXT_PUBLIC_API_URL}/sitemaps`, sitemapData)

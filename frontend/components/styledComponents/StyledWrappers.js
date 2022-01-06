@@ -71,6 +71,14 @@ export const StyledAsideWrapper = styled.div`
     props.themeStyle === "expanded"
       ? css`
           max-width: 100%;
+          .rst {
+            &__rowTitle {
+              display: block;
+              input {
+                width: 100%;
+              }
+            }
+          }
         `
       : css`
           max-width: 450px;
