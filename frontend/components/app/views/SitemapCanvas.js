@@ -17,9 +17,7 @@ const MenuGenerator = (items, buttonStyles, handleTree) => {
             <div className="drop-box"></div>
           </div>
           <div
-            onClick={() =>
-              handleTree.updateNodeColor(item.nodeId) && handleTree.updateNodeColor(item.nodeId)
-            }
+            onClick={() => handleTree && handleTree.updateNodeColor(item.nodeId)}
             style={buttonStyles}
             className={`page ${item.children && item.children.length > 0 ? "" : "nochilds"}`}
           >

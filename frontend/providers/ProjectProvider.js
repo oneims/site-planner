@@ -88,6 +88,7 @@ const ProjectProvider = (props) => {
       })
       .catch((err) => {
         console.log(err);
+        alert("Oops, an error occured. Please try again later");
       })
       .finally(() => {
         setMisc({
@@ -131,6 +132,7 @@ const ProjectProvider = (props) => {
       })
       .catch((err) => {
         console.log(err);
+        alert("Oops, an error occured. Please try again later");
       })
       .finally(() => {
         setMisc({
@@ -334,6 +336,7 @@ const ProjectProvider = (props) => {
       loading: true,
     });
     let sitemapData;
+    console.log(sitemapIdToClone);
     if (sitemapIdToClone) {
       const sitemapToClone = sitemaps.filter((elem) => elem.id === sitemapIdToClone)[0];
       sitemapData = {

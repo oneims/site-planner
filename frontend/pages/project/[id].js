@@ -52,7 +52,7 @@ const ProjectOverview = ({
                         <SitemapCard
                           title="Add a New Sitemap"
                           addNew
-                          clickHandler={addNewSitemap}
+                          clickHandler={() => addNewSitemap()}
                         />
                       </Col>
                     </Row>
