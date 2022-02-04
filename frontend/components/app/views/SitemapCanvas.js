@@ -5,6 +5,18 @@ import { StyledSitemap } from "@/components/styledComponents/StyledElements";
 const MenuGenerator = (items, buttonStyles, handleTree) => {
   items = Array.from(items);
   return items.map((item, index) => {
+    const nodeStyles = {
+      backgroundColor: item.backgroundColor
+        ? `rgba(${item.backgroundColor.r}, ${item.backgroundColor.g}, ${item.backgroundColor.b}, ${item.backgroundColor.a})`
+        : buttonStyles.backgroundColor,
+      borderColor: item.borderColor
+        ? `rgba(${item.borderColor.r}, ${item.borderColor.g}, ${item.borderColor.b}, ${item.borderColor.a})`
+        : buttonStyles.borderColor,
+      color: item.textColor
+        ? `rgba(${item.textColor.r}, ${item.textColor.g}, ${item.textColor.b}, ${item.textColor.a})`
+        : buttonStyles.color,
+      cursor: item.nodeId && handleTree ? `pointer` : ``,
+    };
     return (
       <li
         key={index}
@@ -17,9 +29,15 @@ const MenuGenerator = (items, buttonStyles, handleTree) => {
             <div className="drop-box"></div>
           </div>
           <div
-            onClick={() => handleTree && handleTree.updateNodeColor(item.nodeId)}
-            style={buttonStyles}
-            className={`page ${item.children && item.children.length > 0 ? "" : "nochilds"}`}
+            onClick={() => {
+              if (handleTree) {
+                handleTree.updateNodeSettings(item);
+              }
+            }}
+            style={nodeStyles}
+            className={`page ${item.nodeId && handleTree ? `theme__node-hover` : ``} ${
+              item.children && item.children.length > 0 ? "" : "nochilds"
+            }`}
           >
             {item.name.trim().length > 0 ? item.name : `...`}
           </div>

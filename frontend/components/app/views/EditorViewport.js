@@ -8,6 +8,7 @@ import {
   StyledViewPort,
   StyledViewPortWrapper,
 } from "@/components/styledComponents/StyledWrappers";
+import Drawer from "@/components/app/views/Drawer";
 import {
   StyledAppHeadingLabel,
   StyledAppContentTypography,
@@ -250,6 +251,16 @@ const EditorViewport = (props) => {
               <SitemapCanvas canvasZoom={canvasZoom} {...props} />
             </StyledContentBox>
           </StyledViewPort>
+          <Drawer
+            handleSave={handleSave}
+            textColor={textColor}
+            borderColor={borderColor}
+            primaryColor={primaryColor}
+            handleTree={props.handleTree}
+            drawerOpen={props.drawerOpen}
+            handleDrawer={props.handleDrawer}
+            selectedNode={props.selectedNode}
+          />
         </StyledViewPortWrapper>
       )}
     </>

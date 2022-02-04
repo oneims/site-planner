@@ -1343,3 +1343,93 @@ export const StyledSitemap = styled.div`
   //   }
   // }
 `;
+
+// Drawer
+export const StyledDrawer = styled.div`
+  width: 100vw;
+  @media (min-width: 576px) {
+    width: 28rem;
+  }
+  transition-property: none;
+  transition-duration: 150ms;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  z-index: 11111;
+  right: ${(props) => (props.Left ? "unset" : "0")};
+  left: ${(props) => (props.Left ? "0" : "unset")};
+  background-color: #fff;
+  box-shadow: -3px 0 8px 0 rgb(66 91 118 / 21%);
+  overflow-y: scroll;
+  transition: 0.2s ease;
+  pointer-events: none;
+  transform: translateX(100%);
+  transform: ${(props) => (props.Left ? "translateX(-100%)" : "translateX(100%)")};
+  &.active {
+    transition: 0.3s ease;
+    pointer-events: all;
+    transform: translateX(0rem);
+  }
+`;
+export const StyledDrawerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`;
+export const StyledDrawerHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #00bda5;
+  background-image: linear-gradient(-303deg, #818cf8, #6287d0 56%, #758cbb);
+  color: #fff;
+  padding: 1.5rem 1rem;
+`;
+export const StyledDrawerBody = styled.div`
+  padding: 1.5rem 1rem;
+  position: relative;
+  overflow: auto;
+  padding-bottom: 8rem;
+  ${(props) =>
+    props.SetMinHeight
+      ? css`
+          min-height: 80vh;
+        `
+      : ""}
+`;
+export const StyledDrawerFooter = styled.div`
+  width: 100%;
+  background-color: #f7f9fb;
+  border-top: 0.125rem solid #cbd6e2;
+`;
+
+export const StyledDrawerFooterContent = styled.div`
+  padding: 1rem;
+`;
+
+export const StyledDrawerCloseButtonWrapper = styled.div``;
+
+export const StyledDrawerCloseButton = styled.button`
+  outline: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  background-color: #3b6ccd;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  border: 0.0625rem solid #3769cd;
+  transition: 0.2s ease;
+  &:hover {
+    background-color: #305cb3;
+    transition: 0.2s ease;
+    border-color: #305cb3;
+  }
+  figure {
+    margin: 0;
+  }
+  svg {
+    path {
+      fill: #fff;
+    }
+  }
+`;

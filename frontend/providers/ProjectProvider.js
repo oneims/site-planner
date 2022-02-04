@@ -49,6 +49,8 @@ const ProjectProvider = (props) => {
   });
   const [saving, setSaving] = useState(false);
   const [projectDataReady, setProjectDataReady] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [selectedNode, setSelectedNode] = useState(null);
   const router = useRouter();
 
   const fetchSitemapData = async () => {
@@ -175,6 +177,15 @@ const ProjectProvider = (props) => {
     fetchProjectData();
   }, [router]);
 
+  const handleDrawer = {
+    open: () => {
+      setDrawerOpen(true);
+    },
+    close: () => {
+      setDrawerOpen(false);
+    },
+  };
+
   const handleTree = {
     positionChange: (treeData) => {
       setData({
@@ -194,39 +205,49 @@ const ProjectProvider = (props) => {
         }),
       });
     },
-    updateNodeColor: (nodeId) => {
-      console.log(nodeId ? `${nodeId} clicked` : `Node without an ID clicked`);
-      // ******** Below snippet helps update the color of a singular node
-      // let updatedTreeData;
-      // let itemToUpdate;
-      // if (nodeId) {
-      //   console.log(nodeId);
-      //   updatedTreeData = [...data.treeData];
-      //   itemToUpdate = findNodeByNodeId(updatedTreeData, nodeId);
-      //   itemToUpdate.name = "New Name";
-      //   setData({
-      //     ...data,
-      //     treeData: [...updatedTreeData],
-      //   });
-      // }
-      // ******** Above snippet helps update the color of a singular node
-      // const item
-      // itemToUpdate = { ...updatedTreeData[index] };
-      // itemToUpdate.name = "New Name";
-      // updatedTreeData[index] = itemToUpdate;
-      // if (updatedTreeData[parentIndex].children) {
-      //   // itemToUpdate = { ...updatedTreeData[parentIndex].children[index] };
-      //   // itemToUpdate.name = "New Name";
-      //   // updatedTreeData[parentIndex].children[parentIndex] = itemToUpdate;
-      // } else {
-      //   itemToUpdate = { ...updatedTreeData[index] };
-      //   itemToUpdate.name = "New Name";
-      //   updatedTreeData[index] = itemToUpdate;
-      // }
-      // setData({
-      //   ...data,
-      //   treeData: [...updatedTreeData],
-      // });
+    updateNodeSettings: (node) => {
+      console.log(node.nodeId ? `${node.nodeId} clicked` : `Node without an ID clicked`);
+      if (!node.nodeId) {
+        return;
+      }
+      handleDrawer.open();
+      setSelectedNode(node);
+    },
+    updateNodeBackgroundColor: (color) => {
+      if (!selectedNode.nodeId) {
+        return;
+      }
+      const updatedTreeData = [...data.treeData];
+      const itemToUpdate = findNodeByNodeId(updatedTreeData, selectedNode.nodeId);
+      itemToUpdate.backgroundColor = color.rgb;
+      setData({
+        ...data,
+        treeData: [...updatedTreeData],
+      });
+    },
+    updateNodeBorderColor: (color) => {
+      if (!selectedNode.nodeId) {
+        return;
+      }
+      const updatedTreeData = [...data.treeData];
+      const itemToUpdate = findNodeByNodeId(updatedTreeData, selectedNode.nodeId);
+      itemToUpdate.borderColor = color.rgb;
+      setData({
+        ...data,
+        treeData: [...updatedTreeData],
+      });
+    },
+    updateNodeTextColor: (color) => {
+      if (!selectedNode.nodeId) {
+        return;
+      }
+      const updatedTreeData = [...data.treeData];
+      const itemToUpdate = findNodeByNodeId(updatedTreeData, selectedNode.nodeId);
+      itemToUpdate.textColor = color.rgb;
+      setData({
+        ...data,
+        treeData: [...updatedTreeData],
+      });
     },
     addChildItem: (path, itemName, getNodeKey, addNodeUnderParent) => {
       setData({
@@ -412,6 +433,9 @@ const ProjectProvider = (props) => {
   return (
     <ProjectLayout loading={misc.loading}>
       <Component
+        selectedNode={selectedNode}
+        handleDrawer={handleDrawer}
+        drawerOpen={drawerOpen}
         handleTitleEditor={handleTitleEditor}
         saveTitle={saveTitle}
         handleSave={handleSave}

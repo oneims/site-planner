@@ -41,11 +41,11 @@ const ProjectHeader = () => {
                 </Link>
               )}
             </StyledHeaderColumn>
-            <StyledHeaderColumn>
+            {/* <StyledHeaderColumn>
               <Link href="#">
                 <StyledButton themeStyle="primary">Email Me This Project</StyledButton>
               </Link>
-            </StyledHeaderColumn>
+            </StyledHeaderColumn> */}
           </StyledHeaderWrapper>
         </Container>
       </StyledHeader>

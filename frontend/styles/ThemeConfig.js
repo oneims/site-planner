@@ -486,6 +486,27 @@ h6,
     background-image: radial-gradient(circle at 1px 1px, #5371939e 1px, transparent 0);
     background-size: 40px 40px;
   }
+  &__truncate{
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &__node-hover {
+    transition: 0.2s ease;
+    &:hover {
+      transition: 0.2s ease;
+      transform: translateY(-2px);
+    }
+  }
+}
+.twitter-picker {
+  width: 100% !important;
+  margin-top: 1rem;
+  max-width: 95%;
+  input {
+    font-weight: 600;
+  }
 }
 
 // Animation
@@ -495,5 +516,6 @@ h6,
     transform: rotate(360deg);
   }
 }
+
 
 `;
