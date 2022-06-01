@@ -13,14 +13,16 @@ const SitemapCard = (props) => {
   return (
     <>
       {props.addNew ? (
-        <StyledSitemapCard className="theme__border-radius-15" onClick={props.clickHandler}>
+        <StyledSitemapCard className="theme__border-radius-15">
           <StyledSitemapTop className="theme__border-radius-top-15" />
           <StyledContentBox className="pt-4 pb-3 px-3 d-flex flex-column theme__height-100">
             <StyledSitemapCardContent>
               <StyledAppHeadingLabel className="mb-0">{props.title}</StyledAppHeadingLabel>
             </StyledSitemapCardContent>
             <StyledContentBox className="mt-auto">
-              <StyledPrivateButton className="mb-2 mt-2 show-on-hover">Add New</StyledPrivateButton>
+              <StyledPrivateButton className="mb-2 mt-2 show-on-hover" onClick={props.clickHandler}>
+                Add New
+              </StyledPrivateButton>
             </StyledContentBox>
           </StyledContentBox>
         </StyledSitemapCard>

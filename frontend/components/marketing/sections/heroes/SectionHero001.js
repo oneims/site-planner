@@ -10,11 +10,8 @@ const SectionHero001 = () => {
     <StyledSection>
       <Container>
         <StyledContentBox maxWidth="800" className="mx-auto text-center">
-          <StyledHeadingOne>Siteplanner's Homepage</StyledHeadingOne>
-          <StyledSubtitle>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-            has been the industry's standard dummy text ever since the 1500s.
-          </StyledSubtitle>
+          <StyledHeadingOne>Hello! 👋</StyledHeadingOne>
+          <StyledSubtitle>Let's begin with your siteplanner!</StyledSubtitle>
           <StyledContentBox className="d-sm-flex justify-content-center mt-4">
             <Link href="/project-wizard/step-one">
               <StyledButton size="large" themeStyle="primary">

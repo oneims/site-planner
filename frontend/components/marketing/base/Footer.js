@@ -12,7 +12,7 @@ const Footer = () => {
       <StyledFooter>
         <Container>
           <StyledFooterWrapper>
-            <StyledFooterText Gray>© Copyright SitePlanner 2021</StyledFooterText>
+            <StyledFooterText Gray>© Copyright SitePlanner 2022</StyledFooterText>
           </StyledFooterWrapper>
         </Container>
       </StyledFooter>
